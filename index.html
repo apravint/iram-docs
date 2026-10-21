@@ -39,6 +39,8 @@
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
+      transition: transform 0.25s ease;
+      z-index: 100;
     }
     .logo-container {
       padding: 24px 20px;
@@ -128,6 +130,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      position: relative;
     }
     header {
       height: 64px;
@@ -135,9 +138,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 36px;
-      background: rgba(9, 13, 22, 0.8);
+      padding: 0 32px;
+      background: rgba(9, 13, 22, 0.85);
       backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 22px;
+      cursor: pointer;
+      margin-right: 12px;
     }
     .header-links a {
       color: var(--text-dim);
@@ -250,6 +263,10 @@
       color: var(--cyan);
       font-weight: 600;
     }
+    .code-container {
+      position: relative;
+      margin: 18px 0;
+    }
     pre {
       background: var(--code-bg);
       border: 1px solid var(--border);
@@ -259,8 +276,6 @@
       font-size: 13px;
       color: #e2e8f0;
       overflow-x: auto;
-      margin: 16px 0;
-      position: relative;
     }
     code {
       font-family: 'Fira Code', monospace;
@@ -275,14 +290,91 @@
       padding: 0;
       color: inherit;
     }
-    .badge-pill {
-      display: inline-block;
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      color: var(--text-dim);
       font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .copy-btn:hover {
+      background: rgba(99, 102, 241, 0.3);
+      color: #fff;
+    }
+    /* INTERACTIVE PLAYGROUND */
+    .playground-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 24px 0;
+    }
+    .playground-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .playground-select {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+      flex: 1;
+      min-width: 220px;
+    }
+    .playground-btn {
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      color: #fff;
+      font-size: 13px;
       font-weight: 600;
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--cyan);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .playground-btn:hover {
+      background: #4f46e5;
+    }
+    .playground-output {
+      background: #03050a;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: #a5b4fc;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    @media (max-width: 768px) {
+      body { flex-direction: column; }
+      #sidebar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.6);
+      }
+      #sidebar.open {
+        transform: translateX(0);
+      }
+      .mobile-menu-btn { display: inline-block; }
+      .content-area { padding: 24px 20px; }
+      header { padding: 0 16px; }
     }
   </style>
 </head>
@@ -319,7 +411,10 @@
   <!-- MAIN VIEWPORT -->
   <div id="main">
     <header>
-      <div style="font-size: 14px; color: var(--text-dim);">Sovereign Agentic Operating System & Developer Docs</div>
+      <div style="display: flex; align-items: center;">
+        <button id="menuBtn" class="mobile-menu-btn" title="Toggle Sidebar">☰</button>
+        <div style="font-size: 14px; color: var(--text-dim);">Sovereign Agentic Operating System & Developer Docs</div>
+      </div>
       <div class="header-links">
         <a href="https://github.com/apravint/iram-os" target="_blank">IRAM OS GitHub</a>
         <a href="https://github.com/apravint/fastmcp-linux-desktop" target="_blank">FastMCP Server</a>
@@ -368,8 +463,28 @@
       <section id="sec-fastmcp" class="doc-section">
         <h1>FastMCP Linux Desktop Control Server</h1>
         <p>The <code>fastmcp-linux-desktop</code> daemon provides high-performance JSON-RPC Model Context Protocol tools for AI assistants (Claude Desktop, Cursor, Antigravity, OpenRig).</p>
-        <pre><code>pip install fastmcp-linux-desktop
+        
+        <div class="code-container">
+          <pre><code>pip install fastmcp-linux-desktop
 fastmcp-linux-desktop --sse --port 8991</code></pre>
+        </div>
+
+        <h2>🧪 Interactive FastMCP Tool Playground</h2>
+        <div class="playground-box">
+          <div class="playground-row">
+            <select id="toolSelect" class="playground-select">
+              <option value="get_windows">get_windows() — List active windows and workspaces</option>
+              <option value="focus_window">focus_window(target) — Focus client by class or address</option>
+              <option value="get_audio_status">get_audio_status() — Active audio sink, volume & mute</option>
+              <option value="toggle_audio_sink">toggle_audio_sink() — Switch between Line Out & HDMI</option>
+              <option value="get_system_health">get_system_health() — Audit systemd & memory</option>
+              <option value="condense_context">condense_context(raw_text, query) — BM25 reduction</option>
+              <option value="memory_retain">memory_retain(fact, category) — Retain episodic fact</option>
+            </select>
+            <button id="runToolBtn" class="playground-btn">Simulate JSON-RPC Call</button>
+          </div>
+          <div id="toolOutput" class="playground-output">// Select a tool above and click "Simulate JSON-RPC Call" to view the live schema payload</div>
+        </div>
 
         <h2>Catalog of 28 Native OS Tools</h2>
         <table>
@@ -390,9 +505,12 @@ fastmcp-linux-desktop --sse --port 8991</code></pre>
       <section id="sec-hyprland" class="doc-section">
         <h1>Hyprland 0.56 & hypr-doctor Linter</h1>
         <p><code>hypr-doctor</code> is a zero-dependency static analysis linter and duplicate keybinding detector that guarantees clean, error-free Hyprland configurations.</p>
-        <pre><code>pip install hypr-doctor
+        
+        <div class="code-container">
+          <pre><code>pip install hypr-doctor
 hypr-doctor check ~/.config/hypr/hyprland.conf
 hypr-doctor reload</code></pre>
+        </div>
 
         <h2>Conflict-Free Dedicated AI Shortcut Layer</h2>
         <p>All autonomous ecosystem tools operate under the dedicated <code>$mainMod CTRL ALT</code> modifier namespace to eliminate window management collisions:</p>
@@ -414,52 +532,64 @@ hypr-doctor reload</code></pre>
       <section id="sec-context" class="doc-section">
         <h1>context-condenser (98% BM25 Engine)</h1>
         <p>Eliminate LLM context exhaustion. <code>context-condenser</code> uses local SQLite FTS5 BM25 token frequency ranking to shrink logs, git diffs, and tool outputs prior to prompting.</p>
-        <pre><code>pip install context-condenser
+        <div class="code-container">
+          <pre><code>pip install context-condenser
 cat debug.log | context-condenser -q "ConnectionResetError" --ratio 0.05</code></pre>
+        </div>
       </section>
 
       <!-- SECTION: HINDSIGHT MEMORY -->
       <section id="sec-memory" class="doc-section">
         <h1>agent-hindsight (Temporal Memory)</h1>
         <p>Persistent long-term memory engine for AI coding agents with half-life recency decay and semantic reflection.</p>
-        <pre><code>pip install agent-hindsight
+        <div class="code-container">
+          <pre><code>pip install agent-hindsight
 agent-hindsight retain "Default sink is combined_displays at metric 100" -c audio -i 5
 agent-hindsight recall "audio sink"</code></pre>
+        </div>
       </section>
 
       <!-- SECTION: SECURITY AUDIT -->
       <section id="sec-security" class="doc-section">
         <h1>adversarial-pre-push Gate</h1>
         <p>6-phase security auditing git pre-push gate with separated Hunter and Verifier stages to catch secrets, eval leaks, and shell injection seams.</p>
-        <pre><code>pip install adversarial-pre-push
+        <div class="code-container">
+          <pre><code>pip install adversarial-pre-push
 adversarial-pre-push install-hook /path/to/repo
 adversarial-pre-push audit .</code></pre>
+        </div>
       </section>
 
       <!-- SECTION: DUAL WIFI -->
       <section id="sec-wifi" class="doc-section">
         <h1>linux-dual-wifi (ECMP Multi-WAN)</h1>
         <p>Aggregates concurrent internal PCIe and external USB Wi-Fi adapters using Linux kernel Equal-Cost Multi-Path policy routing tables and layer 4 flow hashing.</p>
-        <pre><code>git clone https://github.com/apravint/linux-dual-wifi.git
+        <div class="code-container">
+          <pre><code>git clone https://github.com/apravint/linux-dual-wifi.git
 cd linux-dual-wifi && ./install.sh
 dual-wifi balance</code></pre>
+        </div>
       </section>
 
       <!-- SECTION: ARCHIFY -->
       <section id="sec-archify" class="doc-section">
         <h1>archify-py (Visualizer)</h1>
         <p>Zero-dependency architecture mapper that scans repositories and generates interactive glassmorphic HTML dashboards or embeddable SVG diagrams.</p>
-        <pre><code>pip install archify-py
+        <div class="code-container">
+          <pre><code>pip install archify-py
 archify . --svg architecture.svg --open</code></pre>
+        </div>
       </section>
 
       <!-- SECTION: LIVE ISO -->
       <section id="sec-iso" class="doc-section">
         <h1>Ubuntu 26.10 Live ISO Toolchain</h1>
         <p>Automated toolchain with automated headless QEMU boot verification to compile bootable hybrid Live ISOs.</p>
-        <pre><code>git clone https://github.com/apravint/ubuntu-hyprland-iso-builder.git
+        <div class="code-container">
+          <pre><code>git clone https://github.com/apravint/ubuntu-hyprland-iso-builder.git
 cd ubuntu-hyprland-iso-builder
 sudo bash build/build-iso.sh</code></pre>
+        </div>
       </section>
 
     </div>
@@ -469,6 +599,9 @@ sudo bash build/build-iso.sh</code></pre>
     // Live Sidebar Tab Switching
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.doc-section');
+    const sidebar = document.getElementById('sidebar');
+    const menuBtn = document.getElementById('menuBtn');
+
     navItems.forEach(item => {
       item.addEventListener('click', () => {
         navItems.forEach(n => n.classList.remove('active'));
@@ -477,8 +610,17 @@ sudo bash build/build-iso.sh</code></pre>
         const targetId = item.getAttribute('data-target');
         const targetSec = document.getElementById(targetId);
         if (targetSec) targetSec.classList.add('active');
+        if (window.innerWidth <= 768) {
+          sidebar.classList.remove('open');
+        }
       });
     });
+
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+      });
+    }
 
     // Client-side search filtering
     const searchInput = document.getElementById('docSearch');
@@ -489,6 +631,75 @@ sudo bash build/build-iso.sh</code></pre>
         item.parentElement.style.display = text.includes(q) ? 'block' : 'none';
       });
     });
+
+    // 1-Click Code Block Copy Buttons
+    document.querySelectorAll('.code-container').forEach(container => {
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.innerText = 'Copy';
+      btn.addEventListener('click', () => {
+        const code = container.querySelector('code').innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          btn.innerText = 'Copied!';
+          setTimeout(() => btn.innerText = 'Copy', 2000);
+        });
+      });
+      container.appendChild(btn);
+    });
+
+    // FastMCP Playground Simulator
+    const toolSelect = document.getElementById('toolSelect');
+    const runToolBtn = document.getElementById('runToolBtn');
+    const toolOutput = document.getElementById('toolOutput');
+
+    const MOCK_DATA = {
+      get_windows: {
+        method: "tools/call",
+        params: { name: "get_windows", arguments: {} },
+        result: [
+          { address: "0x59a3aa3dee90", title: "Paperclip Orchestrator", class: "Google-chrome", workspace: "1" },
+          { address: "0x59a3aa3d54d0", title: "IRAM Shell — Konsole", class: "org.kde.konsole", workspace: "1" }
+        ]
+      },
+      focus_window: {
+        method: "tools/call",
+        params: { name: "focus_window", arguments: { target: "Google-chrome" } },
+        result: { status: "success", message: "Focused window: Google-chrome (0x59a3aa3dee90)" }
+      },
+      get_audio_status: {
+        method: "tools/call",
+        params: { name: "get_audio_status", arguments: {} },
+        result: { default_sink: "combined_displays", volume: "100%", mute: false, driver: "PipeWire" }
+      },
+      toggle_audio_sink: {
+        method: "tools/call",
+        params: { name: "toggle_audio_sink", arguments: {} },
+        result: { action: "toggled", new_sink: "alsa_output.pci-0000_00_1b.0.analog-stereo" }
+      },
+      get_system_health: {
+        method: "tools/call",
+        params: { name: "get_system_health", arguments: {} },
+        result: { systemd_failed_units: 0, memory_available: "10Gi", swap_used: "2.9Mi", status: "HEALTHY" }
+      },
+      condense_context: {
+        method: "tools/call",
+        params: { name: "condense_context", arguments: { raw_text: "[5,000 lines of journalctl]", query: "error" } },
+        result: { original_tokens: 18450, condensed_tokens: 368, compression_ratio: "98.01%", status: "BM25 Ranked" }
+      },
+      memory_retain: {
+        method: "tools/call",
+        params: { name: "memory_retain", arguments: { fact: "Dual Wi-Fi uses table 200 via 192.168.29.1", category: "network" } },
+        result: { entry_id: 142, timestamp: "2026-10-21T10:20:00", status: "Retained with half-life decay" }
+      }
+    };
+
+    if (runToolBtn) {
+      runToolBtn.addEventListener('click', () => {
+        const tool = toolSelect.value;
+        const mock = MOCK_DATA[tool] || { error: "Unknown tool" };
+        toolOutput.innerText = JSON.stringify(mock, null, 2);
+      });
+    }
   </script>
 </body>
 </html>
