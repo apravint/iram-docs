@@ -3,96 +3,256 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IRAM OS & Sovereign Agentic Stack — Documentation Portal</title>
+  <title>IRAM OS & Sovereign Agentic Stack — Official Documentation & Technical Portal</title>
+  <meta name="description" content="Official technical documentation, FastMCP 28-tool reference, Storytold Craft creative suite, Universal Video Engine, and Hyprland 0.56 keybinding catalogs for IRAM OS.">
+  <meta name="keywords" content="IRAM OS, Hyprland, Linux, FastMCP, Model Context Protocol, OpenMontage, Storytold Craft, ALPORA themes, AI agents, PipeWire, Ubuntu 26.10">
+  <meta property="og:title" content="IRAM OS & Sovereign Agentic Stack — Technical Documentation Portal">
+  <meta property="og:description" content="Interactive documentation portal for IRAM OS. Turnkey Linux, FastMCP 28-tool control daemon, Storytold Craft Suite, and Universal Video Engine.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://apravint.github.io/iram-docs/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#090d16">
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #090d16;
       --sidebar-bg: #0d121f;
-      --card-bg: rgba(20, 27, 45, 0.7);
+      --card-bg: rgba(20, 27, 45, 0.75);
+      --card-border: rgba(99, 102, 241, 0.22);
       --border: rgba(99, 102, 241, 0.2);
       --accent: #6366f1;
       --accent-glow: rgba(99, 102, 241, 0.35);
       --cyan: #38bdf8;
       --green: #4ade80;
       --purple: #c084fc;
+      --amber: #fbbf24;
+      --rose: #f43f5e;
       --text: #f8fafc;
       --text-dim: #94a3b8;
       --code-bg: #050811;
+      --header-bg: rgba(9, 13, 22, 0.88);
+      --badge-bg: rgba(99, 102, 241, 0.15);
+      --transition-speed: 0.2s;
     }
+
+    /* THEME OVERRIDES APPLIED DYNAMICALLY VIA JS */
+    body.theme-alpora-alpine {
+      --bg: #07131e;
+      --sidebar-bg: #0c1c2b;
+      --card-bg: rgba(14, 34, 56, 0.75);
+      --card-border: rgba(56, 189, 248, 0.25);
+      --border: rgba(56, 189, 248, 0.22);
+      --accent: #0284c7;
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --cyan: #38bdf8;
+      --green: #34d399;
+      --purple: #818cf8;
+      --text: #f0f9ff;
+      --text-dim: #93c5fd;
+      --code-bg: #040c14;
+      --header-bg: rgba(7, 19, 30, 0.9);
+      --badge-bg: rgba(56, 189, 248, 0.15);
+    }
+
+    body.theme-cyber-neon {
+      --bg: #080612;
+      --sidebar-bg: #0f0b24;
+      --card-bg: rgba(28, 18, 56, 0.75);
+      --card-border: rgba(244, 63, 94, 0.32);
+      --border: rgba(244, 63, 94, 0.25);
+      --accent: #f43f5e;
+      --accent-glow: rgba(244, 63, 94, 0.4);
+      --cyan: #06b6d4;
+      --green: #10b981;
+      --purple: #e11d48;
+      --text: #ffffff;
+      --text-dim: #cbd5e1;
+      --code-bg: #04030a;
+      --header-bg: rgba(8, 6, 18, 0.9);
+      --badge-bg: rgba(244, 63, 94, 0.18);
+    }
+
+    body.theme-rose-pine {
+      --bg: #191724;
+      --sidebar-bg: #1f1d2e;
+      --card-bg: rgba(38, 35, 58, 0.8);
+      --card-border: rgba(235, 188, 186, 0.25);
+      --border: rgba(235, 188, 186, 0.2);
+      --accent: #eb6f92;
+      --accent-glow: rgba(235, 111, 146, 0.35);
+      --cyan: #9ccfd8;
+      --green: #31748f;
+      --purple: #c4a7e7;
+      --text: #e0def4;
+      --text-dim: #908caa;
+      --code-bg: #13111c;
+      --header-bg: rgba(25, 23, 36, 0.9);
+      --badge-bg: rgba(235, 111, 146, 0.15);
+    }
+
+    body.theme-catppuccin {
+      --bg: #1e1e2e;
+      --sidebar-bg: #181825;
+      --card-bg: rgba(49, 50, 68, 0.75);
+      --card-border: rgba(203, 166, 247, 0.25);
+      --border: rgba(203, 166, 247, 0.2);
+      --accent: #cba6f7;
+      --accent-glow: rgba(203, 166, 247, 0.35);
+      --cyan: #89dceb;
+      --green: #a6e3a1;
+      --purple: #f5c2e7;
+      --text: #cdd6f4;
+      --text-dim: #a6adc8;
+      --code-bg: #11111b;
+      --header-bg: rgba(30, 30, 46, 0.9);
+      --badge-bg: rgba(203, 166, 247, 0.15);
+    }
+
+    body.theme-nord {
+      --bg: #242933;
+      --sidebar-bg: #2e3440;
+      --card-bg: rgba(59, 66, 82, 0.75);
+      --card-border: rgba(136, 192, 208, 0.28);
+      --border: rgba(136, 192, 208, 0.2);
+      --accent: #88c0d0;
+      --accent-glow: rgba(136, 192, 208, 0.35);
+      --cyan: #81a1c1;
+      --green: #a3be8c;
+      --purple: #b48ead;
+      --text: #eceff4;
+      --text-dim: #d8dee9;
+      --code-bg: #1d212a;
+      --header-bg: rgba(36, 41, 51, 0.9);
+      --badge-bg: rgba(136, 192, 208, 0.15);
+    }
+
+    body.theme-gruvbox {
+      --bg: #1d2021;
+      --sidebar-bg: #282828;
+      --card-bg: rgba(60, 56, 54, 0.8);
+      --card-border: rgba(250, 189, 47, 0.28);
+      --border: rgba(250, 189, 47, 0.2);
+      --accent: #fe8019;
+      --accent-glow: rgba(254, 128, 25, 0.35);
+      --cyan: #83a598;
+      --green: #b8bb26;
+      --purple: #d3869b;
+      --text: #fbf1c7;
+      --text-dim: #ebdbb2;
+      --code-bg: #141617;
+      --header-bg: rgba(29, 32, 33, 0.9);
+      --badge-bg: rgba(254, 128, 25, 0.15);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       display: flex;
       height: 100vh;
       overflow: hidden;
+      transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
     }
+
     /* SIDEBAR */
     #sidebar {
-      width: 290px;
-      min-width: 290px;
+      width: 310px;
+      min-width: 310px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
-      transition: transform 0.25s ease;
+      transition: transform 0.25s ease, background var(--transition-speed) ease, border-color var(--transition-speed) ease;
       z-index: 100;
     }
+
     .logo-container {
-      padding: 24px 20px;
+      padding: 20px 20px 16px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 12px;
     }
     .logo-icon {
-      font-size: 24px;
-      background: linear-gradient(135deg, var(--accent), var(--cyan));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 800;
+      font-size: 26px;
+      line-height: 1;
     }
     .logo-title {
-      font-size: 17px;
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: 800;
       color: var(--text);
-      letter-spacing: -0.3px;
+      letter-spacing: -0.4px;
+    }
+    .logo-subtitle {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 500;
     }
     .logo-tag {
-      font-size: 10px;
-      padding: 2px 6px;
-      background: rgba(99, 102, 241, 0.2);
+      font-size: 10.5px;
+      padding: 3px 8px;
+      background: var(--badge-bg);
       color: var(--cyan);
-      border-radius: 4px;
+      border-radius: 6px;
       margin-left: auto;
-      font-family: 'Fira Code', monospace;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      border: 1px solid var(--border);
     }
+
     .search-box {
-      padding: 14px 20px;
+      padding: 12px 18px;
       border-bottom: 1px solid var(--border);
+      position: relative;
     }
     .search-input {
       width: 100%;
-      padding: 9px 12px;
+      padding: 9px 12px 9px 34px;
       background: var(--code-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
       color: var(--text);
       font-size: 13px;
       outline: none;
-      transition: border 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     .search-input:focus {
       border-color: var(--cyan);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
     }
+    .search-icon {
+      position: absolute;
+      left: 28px;
+      top: 21px;
+      font-size: 13px;
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+    .search-kbd {
+      position: absolute;
+      right: 26px;
+      top: 19px;
+      font-size: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      pointer-events: none;
+    }
+
     .nav-list {
       flex: 1;
       overflow-y: auto;
-      padding: 16px 12px;
+      padding: 12px 12px 24px;
       list-style: none;
     }
     .nav-category {
@@ -100,8 +260,19 @@
       text-transform: uppercase;
       color: var(--text-dim);
       font-weight: 700;
-      letter-spacing: 0.6px;
-      padding: 12px 10px 6px 10px;
+      letter-spacing: 0.8px;
+      padding: 14px 10px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-category-badge {
+      font-size: 9.5px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: var(--badge-bg);
+      color: var(--cyan);
+      font-weight: 600;
     }
     .nav-item {
       display: flex;
@@ -110,21 +281,24 @@
       padding: 8px 12px;
       border-radius: 6px;
       color: var(--text-dim);
-      font-size: 13.5px;
+      font-size: 13px;
       text-decoration: none;
       transition: all 0.15s ease;
       cursor: pointer;
+      user-select: none;
     }
-    .nav-item:hover, .nav-item.active {
-      background: rgba(99, 102, 241, 0.15);
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
       color: var(--text);
     }
     .nav-item.active {
+      background: var(--badge-bg);
       border-left: 3px solid var(--cyan);
       color: var(--cyan);
       font-weight: 600;
     }
-    /* MAIN CONTENT */
+
+    /* MAIN VIEWPORT */
     #main {
       flex: 1;
       display: flex;
@@ -132,73 +306,175 @@
       overflow: hidden;
       position: relative;
     }
+
     header {
-      height: 64px;
+      min-height: 64px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 32px;
-      background: rgba(9, 13, 22, 0.85);
-      backdrop-filter: blur(8px);
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
       z-index: 10;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
     .mobile-menu-btn {
       display: none;
       background: none;
-      border: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
       color: var(--text);
-      font-size: 22px;
+      font-size: 18px;
+      padding: 4px 10px;
       cursor: pointer;
-      margin-right: 12px;
     }
-    .header-links a {
+    .system-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+    }
+
+    /* LIVE THEME SELECTOR */
+    .theme-selector-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+    .theme-selector-label {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .theme-select {
+      background: transparent;
+      border: none;
+      color: var(--cyan);
+      font-size: 12.5px;
+      font-weight: 600;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+    .theme-select option {
+      background: var(--sidebar-bg);
+      color: var(--text);
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .header-link-btn {
       color: var(--text-dim);
       text-decoration: none;
       font-size: 13px;
-      margin-left: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       transition: color 0.2s;
     }
-    .header-links a:hover {
+    .header-link-btn:hover {
       color: var(--cyan);
     }
+    .github-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .github-pill:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* CONTENT AREA */
     .content-area {
       flex: 1;
       overflow-y: auto;
-      padding: 40px 48px;
+      padding: 36px 48px 60px;
+      scroll-behavior: smooth;
     }
+
     .doc-section {
       display: none;
-      max-width: 960px;
+      max-width: 1040px;
+      animation: fadeIn 0.2s ease-in-out;
     }
     .doc-section.active {
       display: block;
-      animation: fadeIn 0.2s ease-in-out;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* HERO STYLES */
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
     h1 {
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
-      letter-spacing: -0.8px;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #fff, var(--cyan));
+      letter-spacing: -0.9px;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff, var(--cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-wrap: balance;
     }
     h2 {
       font-size: 22px;
       font-weight: 700;
-      margin-top: 36px;
+      margin-top: 40px;
       margin-bottom: 16px;
-      color: #e2e8f0;
+      color: #f1f5f9;
       border-bottom: 1px solid var(--border);
       padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     h3 {
-      font-size: 16px;
+      font-size: 16.5px;
       font-weight: 600;
       margin-top: 24px;
       margin-bottom: 10px;
@@ -206,79 +482,178 @@
     }
     p, li {
       font-size: 14.5px;
-      line-height: 1.65;
+      line-height: 1.68;
       color: #cbd5e1;
       margin-bottom: 14px;
     }
     ul, ol {
-      padding-left: 24px;
+      padding-left: 22px;
       margin-bottom: 20px;
     }
+
+    /* STATS STRIP */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 14px;
+      margin: 24px 0 32px;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    /* CARD GRID */
     .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 18px;
       margin: 24px 0;
     }
     .card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 18px;
-      transition: all 0.2s;
+      padding: 20px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
     }
     .card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
       box-shadow: 0 8px 24px var(--accent-glow);
     }
-    .card-title {
-      font-size: 15px;
-      font-weight: 600;
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .card-icon {
+      font-size: 22px;
+    }
+    .card-badge {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--badge-bg);
       color: var(--cyan);
+      border: 1px solid var(--border);
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
       margin-bottom: 6px;
     }
     .card-desc {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-dim);
-      line-height: 1.5;
+      line-height: 1.55;
+      flex: 1;
+    }
+    .card-footer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* TABLES */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 20px 0;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      background: var(--card-bg);
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 20px 0;
-      background: var(--card-bg);
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border);
+      text-align: left;
     }
     th, td {
       padding: 12px 16px;
-      text-align: left;
       font-size: 13.5px;
       border-bottom: 1px solid var(--border);
     }
     th {
-      background: rgba(99, 102, 241, 0.1);
+      background: rgba(99, 102, 241, 0.08);
       color: var(--cyan);
       font-weight: 600;
+      font-size: 12.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* CODE BOXES */
     .code-container {
       position: relative;
       margin: 18px 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .code-header {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .code-lang-tag {
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--cyan);
     }
     pre {
       background: var(--code-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
       padding: 16px;
-      font-family: 'Fira Code', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       color: #e2e8f0;
       overflow-x: auto;
+      line-height: 1.6;
     }
     code {
-      font-family: 'Fira Code', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 12.5px;
       background: rgba(255, 255, 255, 0.08);
       padding: 2px 6px;
@@ -291,13 +666,10 @@
       color: inherit;
     }
     .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 4px 8px;
+      border-radius: 5px;
+      padding: 4px 10px;
       color: var(--text-dim);
       font-size: 11px;
       font-family: 'Inter', sans-serif;
@@ -305,20 +677,173 @@
       transition: all 0.15s;
     }
     .copy-btn:hover {
-      background: rgba(99, 102, 241, 0.3);
+      background: var(--accent);
       color: #fff;
     }
-    /* INTERACTIVE PLAYGROUND */
+
+    /* INTERACTIVE TERMINAL SIMULATOR */
+    .terminal-box {
+      background: #03060c;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 24px 0 32px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    }
+    .terminal-titlebar {
+      background: #0b111c;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .term-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .term-dot.red { background: #ef4444; }
+    .term-dot.yellow { background: #f59e0b; }
+    .term-dot.green { background: #10b981; }
+    .terminal-title {
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-dim);
+    }
+    .terminal-body {
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      color: #cbd5e1;
+      max-height: 290px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+    .terminal-chips {
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .terminal-chip-label {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .term-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .term-chip:hover {
+      background: var(--badge-bg);
+      border-color: var(--cyan);
+    }
+
+    /* STORYTOLD APP EXPLORER */
+    .app-selector-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 8px 0 16px;
+      margin-bottom: 16px;
+    }
+    .app-tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--text-dim);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .app-tab-btn:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .app-tab-btn.active {
+      background: var(--badge-bg);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .app-detail-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    /* INTERACTIVE PIPELINE FILTER */
+    .pipeline-filter-strip {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0 20px;
+    }
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--badge-bg);
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    /* BADGE STRIP */
+    .badge-strip {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 16px 0 24px;
+    }
+    .badge-strip img {
+      height: 28px;
+      border-radius: 4px;
+    }
+
+    /* PLAYGROUND BOX */
     .playground-box {
       background: var(--code-bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--card-border);
       border-radius: 10px;
       padding: 20px;
-      margin: 24px 0;
+      margin: 20px 0;
     }
     .playground-row {
       display: flex;
-      gap: 16px;
+      gap: 14px;
       margin-bottom: 14px;
       flex-wrap: wrap;
     }
@@ -326,40 +851,60 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 8px 12px;
+      padding: 9px 14px;
       color: var(--text);
       font-size: 13px;
       outline: none;
       flex: 1;
-      min-width: 220px;
+      min-width: 240px;
+      font-family: inherit;
+    }
+    .playground-select option {
+      background: var(--sidebar-bg);
     }
     .playground-btn {
       background: var(--accent);
       border: none;
       border-radius: 6px;
-      padding: 8px 18px;
+      padding: 9px 20px;
       color: #fff;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s;
     }
     .playground-btn:hover {
-      background: #4f46e5;
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
     .playground-output {
       background: #03050a;
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 12px;
-      font-family: 'Fira Code', monospace;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: #a5b4fc;
-      max-height: 220px;
+      max-height: 240px;
       overflow-y: auto;
       white-space: pre-wrap;
     }
-    @media (max-width: 768px) {
+
+    /* ALERTS */
+    .alert-box {
+      border-left: 4px solid var(--cyan);
+      background: var(--badge-bg);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 13.5px;
+    }
+    .alert-box.tip {
+      border-left-color: var(--green);
+      background: rgba(74, 222, 128, 0.1);
+    }
+
+    @media (max-width: 900px) {
       body { flex-direction: column; }
       #sidebar {
         position: absolute;
@@ -367,7 +912,7 @@
         bottom: 0;
         left: 0;
         transform: translateX(-100%);
-        box-shadow: 4px 0 24px rgba(0,0,0,0.6);
+        box-shadow: 4px 0 28px rgba(0,0,0,0.7);
       }
       #sidebar.open {
         transform: translateX(0);
@@ -378,107 +923,273 @@
     }
   </style>
 </head>
-<body>
+<body class="theme-tokyo-storm">
 
   <!-- SIDEBAR NAVIGATION -->
   <nav id="sidebar">
     <div class="logo-container">
       <div class="logo-icon">🌌</div>
-      <div class="logo-title">IRAM OS</div>
+      <div>
+        <div class="logo-title">IRAM OS</div>
+        <div class="logo-subtitle">Sovereign Agentic Desktop</div>
+      </div>
       <span class="logo-tag">v26.10</span>
     </div>
+    
     <div class="search-box">
+      <span class="search-icon">🔍</span>
       <input type="text" id="docSearch" class="search-input" placeholder="Search documentation...">
+      <span class="search-kbd">⌘K</span>
     </div>
-    <ul class="nav-list">
-      <li class="nav-category">Architecture</li>
-      <li><a class="nav-item active" data-target="sec-overview">🌌 System Overview</a></li>
-      <li><a class="nav-item" data-target="sec-fastmcp">🖥️ FastMCP Desktop (28 Tools)</a></li>
-      <li><a class="nav-item" data-target="sec-hyprland">🪟 Hyprland 0.56 & Doctor</a></li>
+    
+    <ul class="nav-list" id="navList">
+      <li class="nav-category">
+        <span>1. Core Architecture</span>
+        <span class="nav-category-badge">4</span>
+      </li>
+      <li><a class="nav-item active" data-target="sec-overview">🌌 System Overview & CLI</a></li>
+      <li><a class="nav-item" data-target="sec-hyprland">🪟 Hyprland 0.56 & Keybindings</a></li>
+      <li><a class="nav-item" data-target="sec-wifi">📡 Dual Wi-Fi ECMP Multi-WAN</a></li>
+      <li><a class="nav-item" data-target="sec-iso">🏗️ Bootable ISO Toolchain</a></li>
 
-      <li class="nav-category">AI Memory & Context</li>
+      <li class="nav-category">
+        <span>2. FastMCP & Agent Swarm</span>
+        <span class="nav-category-badge">5</span>
+      </li>
+      <li><a class="nav-item" data-target="sec-fastmcp">🖥️ FastMCP Desktop (28 Tools)</a></li>
+      <li><a class="nav-item" data-target="sec-agent">🤖 AI Sidecar & Swarm Factory</a></li>
       <li><a class="nav-item" data-target="sec-context">⚡ context-condenser (98% BM25)</a></li>
       <li><a class="nav-item" data-target="sec-memory">🧠 agent-hindsight (Memory)</a></li>
-      <li><a class="nav-item" data-target="sec-security">🛡️ adversarial-pre-push</a></li>
+      <li><a class="nav-item" data-target="sec-security">🛡️ adversarial-pre-push Gate</a></li>
 
-      <li class="nav-category">Platform & Networking</li>
-      <li><a class="nav-item" data-target="sec-wifi">📡 linux-dual-wifi (ECMP)</a></li>
-      <li><a class="nav-item" data-target="sec-archify">🏛️ archify-py (Visualizer)</a></li>
-      <li><a class="nav-item" data-target="sec-iso">🏗️ Bootable ISO Toolchain</a></li>
+      <li class="nav-category">
+        <span>3. Creative Craft Suite</span>
+        <span class="nav-category-badge">2</span>
+      </li>
+      <li><a class="nav-item" data-target="sec-craft">🎨 Storytold Craft Suite (11 Apps)</a></li>
+      <li><a class="nav-item" data-target="sec-artcraft">🚀 ArtCraft Launcher & Hotkeys</a></li>
+
+      <li class="nav-category">
+        <span>4. Universal Film Studio</span>
+        <span class="nav-category-badge">3</span>
+      </li>
+      <li><a class="nav-item" data-target="sec-video">🎬 iram-video & YouTube Cinema</a></li>
+      <li><a class="nav-item" data-target="sec-montage">🎞️ OpenMontage 12-Pipeline Hub</a></li>
+      <li><a class="nav-item" data-target="sec-remotion">⚛️ Remotion & Backlot HUD</a></li>
+
+      <li class="nav-category">
+        <span>5. Theming & Voice</span>
+        <span class="nav-category-badge">2</span>
+      </li>
+      <li><a class="nav-item" data-target="sec-themes">🌈 ALPORA 49 Themes & Timeline</a></li>
+      <li><a class="nav-item" data-target="sec-voice">🎙️ VoiceStudio & Voxtype Dictation</a></li>
+
+      <li class="nav-category">
+        <span>6. Spatial 3D & Quant</span>
+        <span class="nav-category-badge">3</span>
+      </li>
+      <li><a class="nav-item" data-target="sec-spatial">🪐 Three.js 3D Desktop Universe</a></li>
+      <li><a class="nav-item" data-target="sec-archify">🏛️ archify-py Architecture Map</a></li>
+      <li><a class="nav-item" data-target="sec-quant">📈 IRAM Quant Cross-Market Engine</a></li>
     </ul>
   </nav>
 
   <!-- MAIN VIEWPORT -->
   <div id="main">
     <header>
-      <div style="display: flex; align-items: center;">
+      <div class="header-left">
         <button id="menuBtn" class="mobile-menu-btn" title="Toggle Sidebar">☰</button>
-        <div style="font-size: 14px; color: var(--text-dim);">Sovereign Agentic Operating System & Developer Docs</div>
+        <div class="system-status-pill">
+          <span class="status-dot"></span>
+          <span>Ubuntu 26.10 · Hyprland 0.56 · PipeWire Active</span>
+        </div>
       </div>
+
       <div class="header-links">
-        <a href="https://github.com/apravint/iram-os" target="_blank">IRAM OS GitHub</a>
-        <a href="https://github.com/apravint/fastmcp-linux-desktop" target="_blank">FastMCP Server</a>
-        <a href="https://github.com/apravint/hypr-doctor" target="_blank">Hypr Doctor</a>
-        <a href="https://github.com/apravint" target="_blank">@apravint</a>
+        <div class="theme-selector-container">
+          <span class="theme-selector-label">Theme:</span>
+          <select id="themeSelector" class="theme-select">
+            <option value="theme-tokyo-storm">🌌 Tokyo Storm (Default)</option>
+            <option value="theme-alpora-alpine">🏔️ Alpora Alpine</option>
+            <option value="theme-cyber-neon">⚡ Cyber Neon</option>
+            <option value="theme-rose-pine">🌸 Rosé Pine</option>
+            <option value="theme-catppuccin">☕ Catppuccin Mocha</option>
+            <option value="theme-nord">🧊 Nord Frost</option>
+            <option value="theme-gruvbox">🪵 Gruvbox Retro</option>
+          </select>
+        </div>
+
+        <a href="https://github.com/apravint/iram-os" target="_blank" class="github-pill">GitHub ★</a>
       </div>
     </header>
 
     <div class="content-area">
 
-      <!-- SECTION: OVERVIEW -->
+      <!-- ========================================== -->
+      <!-- SECTION 1: SYSTEM OVERVIEW & CLI           -->
+      <!-- ========================================== -->
       <section id="sec-overview" class="doc-section active">
-        <h1>Sovereign Agentic OS Architecture</h1>
-        <p><b>IRAM OS</b> is an independent, turnkey 64-bit Linux distribution engineered from the ground up for modern developers, power users, and autonomous AI agent orchestration.</p>
-        
-        <div class="card-grid">
-          <div class="card">
-            <div class="card-title">Compositor Engine</div>
-            <div class="card-desc">Hyprland 0.56 with sharp 0px geometry, acrylic blur, and sub-100ms zero-restart live theming across 43 palettes.</div>
+        <span class="section-eyebrow">Operating System Architecture</span>
+        <h1>IRAM OS & Sovereign Agentic Stack</h1>
+        <p><b>IRAM OS</b> is an independent, turnkey 64-bit Linux distribution engineered on <b>Ubuntu 26.10</b> and <b>Hyprland 0.56</b>. It unifies autonomous AI agent swarms, the 11-app Storytold creative suite, and the Universal Film & Video Engine into a zero-latency, high-performance desktop.</p>
+
+        <div class="stats-strip">
+          <div class="stat-card">
+            <div class="stat-num">49</div>
+            <div class="stat-label">Curated Themes</div>
           </div>
-          <div class="card">
-            <div class="card-title">FastMCP Integration</div>
-            <div class="card-desc">Native Model Context Protocol daemon (:8991) exposing 28+ hardware, audio, and window management tools to AI agents.</div>
+          <div class="stat-card">
+            <div class="stat-num">11</div>
+            <div class="stat-label">Creative Apps</div>
           </div>
-          <div class="card">
-            <div class="card-title">Studio Audio DSP</div>
-            <div class="card-desc">PipeWire + WirePlumber priority routing with 1-click analog/HDMI output toggling and automated recovery.</div>
+          <div class="stat-card">
+            <div class="stat-num">12</div>
+            <div class="stat-label">Video Pipelines</div>
           </div>
-          <div class="card">
-            <div class="card-title">Kernel ECMP Multi-WAN</div>
-            <div class="card-desc">Aggregates internal PCIe and external USB Wi-Fi adapters with L4 flow hashing and ARP flux mitigation.</div>
+          <div class="stat-card">
+            <div class="stat-num">28+</div>
+            <div class="stat-label">FastMCP OS Tools</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">98%</div>
+            <div class="stat-label">BM25 Compression</div>
+          </div>
+        </div>
+
+        <h2>💻 Interactive CLI Terminal Simulator</h2>
+        <p>Click any command chip below to preview real formatted terminal outputs from the unified <code>iram</code> CLI dispatcher:</p>
+
+        <div class="terminal-box">
+          <div class="terminal-titlebar">
+            <div class="terminal-dots">
+              <div class="term-dot red"></div>
+              <div class="term-dot yellow"></div>
+              <div class="term-dot green"></div>
+            </div>
+            <div class="terminal-title">apravint@iram-os: ~ (Hyprland / foot)</div>
+          </div>
+          <div id="terminalBody" class="terminal-body">$ iram info
+  Operating System: IRAM OS (Ubuntu 26.10 Sovereign Edition)
+  Linux Kernel:     7.3.0-9-generic (x86_64)
+  Compositor:       Hyprland 0.56.2 (Wayland protocol)
+  Active Theme:     Tokyo Storm (Dynamic ALPORA Sub-100ms)
+  Creative Suite:   Storytold Craft Ready (11 Rust native apps)
+  Video Studio:     iram-video 1080p/4K Cinema & OpenMontage Ready
+  FastMCP Server:   Active on port :8991 (28 native tools)
+  Default Agent:    Google Antigravity CLI (agy) & OpenRig Swarm</div>
+          <div class="terminal-chips">
+            <span class="terminal-chip-label">Try Commands:</span>
+            <button class="term-chip" data-cmd="info">iram info</button>
+            <button class="term-chip" data-cmd="pipelines">iram video pipelines</button>
+            <button class="term-chip" data-cmd="craft">iram craft</button>
+            <button class="term-chip" data-cmd="theme">iram theme timeline</button>
+            <button class="term-chip" data-cmd="quant">iram quant us</button>
+            <button class="term-chip" data-cmd="audit">iram-audit</button>
           </div>
         </div>
 
         <h2>Core Subsystem Hierarchy</h2>
-        <table>
-          <tr><th>Layer</th><th>Components</th><th>Role</th></tr>
-          <tr><td><b>Compositor</b></td><td>Hyprland 0.56, Waybar, Mako</td><td>Geometric tiling, glassmorphic HUD, notifications</td></tr>
-          <tr><td><b>Agent Control</b></td><td>FastMCP Server, Command Hub (:8990)</td><td>Low-latency JSON-RPC OS control for AI models</td></tr>
-          <tr><td><b>Context & Memory</b></td><td>context-condenser, agent-hindsight</td><td>98% BM25 compression and temporal fact recall</td></tr>
-          <tr><td><b>Kernel Network</b></td><td>linux-dual-wifi, IP tables 100/200</td><td>Concurrent multi-path packet balancing</td></tr>
-        </table>
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🪟</span>
+              <span class="card-badge">Compositor</span>
+            </div>
+            <div class="card-title">Hyprland 0.56 & Waybar</div>
+            <div class="card-desc">0px geometric tiling, acrylic glassmorphism, duplicate keybind linter, and dedicated AI modifier space.</div>
+            <div class="card-footer">Super + Space · Super + Q</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🖥️</span>
+              <span class="card-badge">Protocol</span>
+            </div>
+            <div class="card-title">FastMCP Linux Desktop</div>
+            <div class="card-desc">PyPI v0.1.0 & Glama Grade-A certified Model Context Protocol server exposing 28+ native OS control tools.</div>
+            <div class="card-footer">Port :8991 · JSON-RPC 2.0</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🎬</span>
+              <span class="card-badge">Media</span>
+            </div>
+            <div class="card-title">Universal Video Engine</div>
+            <div class="card-desc">1080p/4K real documentary generator with OpenMontage 12-pipeline agentic directing and Remotion React renderers.</div>
+            <div class="card-footer">iram video · iram video backlot</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🎨</span>
+              <span class="card-badge">Creative</span>
+            </div>
+            <div class="card-title">Storytold Craft Suite</div>
+            <div class="card-desc">11 high-throughput open-source Rust applications replacing Adobe Creative Cloud and Microsoft Office.</div>
+            <div class="card-footer">iram craft [app]</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🌈</span>
+              <span class="card-badge">Theming</span>
+            </div>
+            <div class="card-title">ALPORA Theme Studio</div>
+            <div class="card-desc">49 curated color palettes with 24-hour circadian timeline and zero-restart live reload across all desktop apps.</div>
+            <div class="card-footer">iram theme [set|timeline]</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">📡</span>
+              <span class="card-badge">Kernel</span>
+            </div>
+            <div class="card-title">Multi-WAN Dual Wi-Fi</div>
+            <div class="card-desc">Aggregates PCIe internal and USB external wireless adapters via Equal-Cost Multi-Path policy routing.</div>
+            <div class="card-footer">iram-network balance</div>
+          </div>
+        </div>
       </section>
 
-      <!-- SECTION: FASTMCP -->
+      <!-- ========================================== -->
+      <!-- SECTION 2: FASTMCP DESKTOP SERVER          -->
+      <!-- ========================================== -->
       <section id="sec-fastmcp" class="doc-section">
+        <span class="section-eyebrow">Model Context Protocol</span>
         <h1>FastMCP Linux Desktop Control Server</h1>
-        <p>The <code>fastmcp-linux-desktop</code> daemon provides high-performance JSON-RPC Model Context Protocol tools for AI assistants (Claude Desktop, Cursor, Antigravity, OpenRig).</p>
-        
+        <p>The <code>fastmcp-linux-desktop</code> daemon provides high-performance JSON-RPC 2.0 Model Context Protocol tools for AI coding assistants (Claude Desktop, Cursor, Google Antigravity, OpenRig, Windsurf).</p>
+
+        <div class="badge-strip">
+          <a href="https://pypi.org/project/fastmcp-linux-desktop/" target="_blank"><img src="https://img.shields.io/pypi/v/fastmcp-linux-desktop?color=4ade80" alt="PyPI Version"></a>
+          <a href="https://glama.ai/mcp/servers/apravint/fastmcp-linux-desktop" target="_blank"><img src="https://glama.ai/mcp/servers/apravint/fastmcp-linux-desktop/badges/score.svg" alt="Glama Score"></a>
+          <a href="https://glama.ai/mcp/servers/apravint/fastmcp-linux-desktop" target="_blank"><img src="https://glama.ai/mcp/servers/apravint/fastmcp-linux-desktop/badges/card.svg" alt="Glama Card"></a>
+          <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
+        </div>
+
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>CLI Installation</span>
+          </div>
           <pre><code>pip install fastmcp-linux-desktop
 fastmcp-linux-desktop --sse --port 8991</code></pre>
         </div>
 
         <h2>🧪 Interactive FastMCP Tool Playground</h2>
+        <p>Select any of the 28 native system tools below to simulate the JSON-RPC execution payload:</p>
         <div class="playground-box">
           <div class="playground-row">
             <select id="toolSelect" class="playground-select">
-              <option value="get_windows">get_windows() — List active windows and workspaces</option>
-              <option value="focus_window">focus_window(target) — Focus client by class or address</option>
-              <option value="get_audio_status">get_audio_status() — Active audio sink, volume & mute</option>
-              <option value="toggle_audio_sink">toggle_audio_sink() — Switch between Line Out & HDMI</option>
-              <option value="get_system_health">get_system_health() — Audit systemd & memory</option>
-              <option value="condense_context">condense_context(raw_text, query) — BM25 reduction</option>
+              <option value="get_windows">get_windows() — Enumerate active clients, geometry & workspaces</option>
+              <option value="focus_window">focus_window(target) — Focus window by title or hex address</option>
+              <option value="get_audio_status">get_audio_status() — Active PipeWire sink, volume & DSP</option>
+              <option value="toggle_audio_sink">toggle_audio_sink() — Switch between Line Out & HDMI TV</option>
+              <option value="audit_media">audit_media(file_path) — Probe video duration, loudness & codecs</option>
+              <option value="set_theme">set_theme(theme_name) — Apply ALPORA theme zero-restart</option>
+              <option value="launch_craft">launch_craft(app) — Launch Storytold Craft Suite app</option>
+              <option value="get_system_health">get_system_health() — Audit systemd & memory units</option>
+              <option value="condense_context">condense_context(raw_text, query) — 98% BM25 reduction</option>
               <option value="memory_retain">memory_retain(fact, category) — Retain episodic fact</option>
             </select>
             <button id="runToolBtn" class="playground-btn">Simulate JSON-RPC Call</button>
@@ -487,26 +1198,349 @@ fastmcp-linux-desktop --sse --port 8991</code></pre>
         </div>
 
         <h2>Catalog of 28 Native OS Tools</h2>
-        <table>
-          <tr><th>Category</th><th>Tool Name</th><th>Function Payload</th></tr>
-          <tr><td><b>Window Mgmt</b></td><td><code>get_windows()</code></td><td>Enumerate all active clients, geometry, and workspaces</td></tr>
-          <tr><td><b>Window Mgmt</b></td><td><code>focus_window(target)</code></td><td>Focus client by title substring, class, or hex address</td></tr>
-          <tr><td><b>Window Mgmt</b></td><td><code>dispatch_hyprland(cmd, args)</code></td><td>Execute any arbitrary hyprctl dispatch instruction</td></tr>
-          <tr><td><b>Audio Routing</b></td><td><code>get_audio_status()</code></td><td>Query default sink, volume percentage, and mute state</td></tr>
-          <tr><td><b>Audio Routing</b></td><td><code>toggle_audio_sink()</code></td><td>Cycle between Motherboard Line Out and TV HDMI</td></tr>
-          <tr><td><b>Diagnostics</b></td><td><code>get_system_health()</code></td><td>Audit failed system/user systemd units and RAM</td></tr>
-          <tr><td><b>Diagnostics</b></td><td><code>heal_system()</code></td><td>Automatically reset-failed and recover audio daemons</td></tr>
-          <tr><td><b>Context</b></td><td><code>condense_context(raw, query)</code></td><td>BM25 relevance ranking token compression up to 98%</td></tr>
-          <tr><td><b>Memory</b></td><td><code>memory_retain(fact, cat, imp)</code></td><td>Retain long-term episodic fact with recency decay</td></tr>
-        </table>
+        <div class="table-wrapper">
+          <table>
+            <tr><th>Category</th><th>Tool Name</th><th>Tier / Behavior</th><th>Function Payload</th></tr>
+            <tr><td><b>Window Mgmt</b></td><td><code>get_windows()</code></td><td>Read-Only</td><td>Enumerate all active clients, geometry, and workspaces</td></tr>
+            <tr><td><b>Window Mgmt</b></td><td><code>focus_window(target)</code></td><td>Idempotent</td><td>Focus client by title substring, class, or hex address</td></tr>
+            <tr><td><b>Window Mgmt</b></td><td><code>dispatch_hyprland(cmd, args)</code></td><td>Action</td><td>Execute any arbitrary hyprctl dispatch instruction</td></tr>
+            <tr><td><b>Audio Routing</b></td><td><code>get_audio_status()</code></td><td>Read-Only</td><td>Query default sink, volume percentage, and mute state</td></tr>
+            <tr><td><b>Audio Routing</b></td><td><code>toggle_audio_sink()</code></td><td>Action</td><td>Cycle between Motherboard Line Out and TV HDMI</td></tr>
+            <tr><td><b>Audio Routing</b></td><td><code>set_volume(pct)</code></td><td>Idempotent</td><td>Adjust active PipeWire hardware sink volume</td></tr>
+            <tr><td><b>Media & Film</b></td><td><code>audit_media(path)</code></td><td>Read-Only</td><td>Run multi-point QC inspection on video or audio files</td></tr>
+            <tr><td><b>Media & Film</b></td><td><code>generate_video(prompt, opts)</code></td><td>Action</td><td>Trigger iram-video documentary or cinema generator</td></tr>
+            <tr><td><b>Creative Suite</b></td><td><code>launch_craft(app)</code></td><td>Idempotent</td><td>Launch PhotoCraft, VectorCraft, FilmCraft, etc.</td></tr>
+            <tr><td><b>Desktop Theming</b></td><td><code>set_theme(palette)</code></td><td>Idempotent</td><td>Switch ALPORA desktop palette sub-100ms without restart</td></tr>
+            <tr><td><b>Diagnostics</b></td><td><code>get_system_health()</code></td><td>Read-Only</td><td>Audit failed system/user systemd units and RAM</td></tr>
+            <tr><td><b>Diagnostics</b></td><td><code>heal_system()</code></td><td>Action</td><td>Reset-failed units and recover audio/compositor daemons</td></tr>
+            <tr><td><b>Context</b></td><td><code>condense_context(raw, query)</code></td><td>Deterministic</td><td>BM25 relevance ranking token compression up to 98%</td></tr>
+            <tr><td><b>Memory</b></td><td><code>memory_retain(fact, cat, imp)</code></td><td>Action</td><td>Retain long-term episodic fact with recency decay</td></tr>
+            <tr><td><b>Memory</b></td><td><code>memory_recall(query)</code></td><td>Read-Only</td><td>Retrieve semantically ranked facts from agent store</td></tr>
+          </table>
+        </div>
       </section>
 
-      <!-- SECTION: HYPRLAND & DOCTOR -->
+      <!-- ========================================== -->
+      <!-- SECTION 3: STORYTOLD CRAFT SUITE           -->
+      <!-- ========================================== -->
+      <section id="sec-craft" class="doc-section">
+        <span class="section-eyebrow">Sovereign Creative Software</span>
+        <h1>Storytold Craft Suite (11 Native Apps)</h1>
+        <p>The <b>Storytold Craft Suite</b> is a high-performance, open-source creative suite built in Rust and GPU-accelerated graphics. It completely replaces proprietary subscription suites (Adobe Creative Cloud, Microsoft 365, Figma) with local, privacy-first sovereign tools.</p>
+
+        <div class="app-selector-strip" id="craftTabStrip">
+          <button class="app-tab-btn active" data-app="photo">🖼️ PhotoCraft</button>
+          <button class="app-tab-btn" data-app="vector">✏️ VectorCraft</button>
+          <button class="app-tab-btn" data-app="film">🎬 FilmCraft</button>
+          <button class="app-tab-btn" data-app="sound">🎚️ SoundCraft</button>
+          <button class="app-tab-btn" data-app="cad">📐 CADCraft</button>
+          <button class="app-tab-btn" data-app="fig">💎 FigCraft</button>
+          <button class="app-tab-btn" data-app="light">☀️ LightCraft</button>
+          <button class="app-tab-btn" data-app="word">📝 WordCraft</button>
+          <button class="app-tab-btn" data-app="grid">📊 GridCraft</button>
+          <button class="app-tab-btn" data-app="deck">📽️ DeckCraft</button>
+          <button class="app-tab-btn" data-app="pdf">📑 PdfCraft</button>
+        </div>
+
+        <div id="craftDetailBox" class="app-detail-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+            <div>
+              <h2 id="craftAppName" style="margin: 0 0 4px 0; border: none; padding: 0;">PhotoCraft</h2>
+              <div id="craftAppRole" style="font-size: 13px; color: var(--cyan); font-weight: 600;">Photoshop Alternative (Raster Image Editor)</div>
+            </div>
+            <div id="craftAppBadge" class="card-badge">craft-photocraft</div>
+          </div>
+          <p id="craftAppDesc">High-speed raster graphics editor supporting PSD import, multi-layer compositing, non-destructive adjustment layers, neural inpainting, and GPU-accelerated brush engines.</p>
+          <div class="card-grid" style="margin: 16px 0;">
+            <div class="card" style="padding: 14px;">
+              <div class="card-title" style="font-size: 13px;">Native File Formats</div>
+              <div id="craftAppFormats" class="card-desc">PSD, PSB, TIFF, PNG, EXR, WebP, JPEG-XL</div>
+            </div>
+            <div class="card" style="padding: 14px;">
+              <div class="card-title" style="font-size: 13px;">CLI Trigger & Hotkey</div>
+              <div id="craftAppCmd" class="card-desc" style="font-family: 'JetBrains Mono'; color: var(--cyan);">iram craft photo · Super + Ctrl + Alt + C</div>
+            </div>
+          </div>
+        </div>
+
+        <h2>Complete Creative Replacement Matrix</h2>
+        <div class="table-wrapper">
+          <table>
+            <tr><th>Storytold App</th><th>Replaces Proprietary</th><th>Core Engineering Focus</th><th>Launch Shortcut</th></tr>
+            <tr><td><b>PhotoCraft</b></td><td>Adobe Photoshop</td><td>PSD layers, clone stamp, frequency separation, RAW export</td><td><code>iram craft photo</code></td></tr>
+            <tr><td><b>VectorCraft</b></td><td>Adobe Illustrator</td><td>Bezier curves, typography on path, SVG/AI/EPS export</td><td><code>iram craft vector</code></td></tr>
+            <tr><td><b>FilmCraft</b></td><td>Adobe Premiere Pro</td><td>Magnetic timeline, 4K multi-camera, color grading LUTs</td><td><code>iram craft film</code></td></tr>
+            <tr><td><b>SoundCraft</b></td><td>Avid Pro Tools / Logic</td><td>PipeWire low-latency multi-track DAW, VST3, MIDI editing</td><td><code>iram craft sound</code></td></tr>
+            <tr><td><b>FigCraft</b></td><td>Figma</td><td>Component tokens, auto-layout canvas, interactive prototypes</td><td><code>iram craft fig</code></td></tr>
+            <tr><td><b>LightCraft</b></td><td>Adobe Lightroom</td><td>Non-destructive RAW demosaicing, exposure curves</td><td><code>iram craft light</code></td></tr>
+            <tr><td><b>CADCraft</b></td><td>AutoCAD / Fusion 360</td><td>2D drafting, 3D parametric STEP/STL meshes, constraints</td><td><code>iram craft cad</code></td></tr>
+            <tr><td><b>WordCraft</b></td><td>Microsoft Word</td><td>Distraction-free typographic word processor, DOCX import</td><td><code>iram craft word</code></td></tr>
+            <tr><td><b>GridCraft</b></td><td>Microsoft Excel</td><td>High-throughput spreadsheets, pivot models, formula engine</td><td><code>iram craft grid</code></td></tr>
+            <tr><td><b>DeckCraft</b></td><td>Microsoft PowerPoint</td><td>Presentation slide decks with animated CSS/WebGL transitions</td><td><code>iram craft deck</code></td></tr>
+            <tr><td><b>PdfCraft</b></td><td>Adobe Acrobat Pro</td><td>PDF markup, cryptographic signatures, text redaction</td><td><code>iram craft pdf</code></td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 3B: ARTCRAFT LAUNCHER & SHORTCUTS  -->
+      <!-- ========================================== -->
+      <section id="sec-artcraft" class="doc-section">
+        <span class="section-eyebrow">Creative Hub & Shortcuts</span>
+        <h1>ArtCraft Launcher & Shortcut Architecture</h1>
+        <p>The <b>ArtCraft Launcher</b> (<code>artcraft-launcher</code> or <code>iram craft</code>) provides an instant GUI and terminal dispatcher for the Storytold creative suite with system tray integration and hotkey management.</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>ArtCraft Commands</span>
+          </div>
+          <pre><code># Open the ArtCraft GUI Launcher Hub
+artcraft-launcher
+
+# Or launch any creative application directly from terminal
+iram craft photo    # Photoshop alternative
+iram craft vector   # Illustrator alternative
+iram craft film     # Premiere Pro alternative
+iram craft sound    # Pro Tools alternative
+iram craft cad      # AutoCAD alternative
+iram craft fig      # Figma alternative</code></pre>
+        </div>
+
+        <h2>Dedicated Creative Shortcuts</h2>
+        <div class="table-wrapper">
+          <table>
+            <tr><th>Shortcut</th><th>Application</th><th>Mode</th></tr>
+            <tr><td><code>Super + Ctrl + Alt + C</code></td><td>PhotoCraft</td><td>Raster editing & PSD canvas</td></tr>
+            <tr><td><code>Super + Ctrl + Alt + V</code></td><td>VectorCraft</td><td>Vector design & typography</td></tr>
+            <tr><td><code>Super + Ctrl + Alt + F</code></td><td>FilmCraft</td><td>Video timeline & color grading</td></tr>
+            <tr><td><code>Super + Ctrl + Alt + S</code></td><td>SoundCraft</td><td>PipeWire audio recording DAW</td></tr>
+            <tr><td><code>Super + Ctrl + Alt + D</code></td><td>CADCraft</td><td>2D drafting & 3D parametric CAD</td></tr>
+            <tr><td><code>Super + Ctrl + Alt + G</code></td><td>FigCraft</td><td>UI/UX design canvas & tokens</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 4: UNIVERSAL FILM & VIDEO ENGINE   -->
+      <!-- ========================================== -->
+      <section id="sec-video" class="doc-section">
+        <span class="section-eyebrow">Cinema & Motion Graphics</span>
+        <h1>Universal Film & Video Studio (`iram-video`)</h1>
+        <p><code>iram-video</code> is IRAM OS's sovereign film directing and compilation studio. It generates real documentary YouTube videos, animated featurettes, cinematic trailers, and Remotion motion graphics with automatic PipeWire audio routing.</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Real 1080p/4K YouTube Documentary Generator</span>
+          </div>
+          <pre><code># Real documentary with 1080p/4K stock B-roll, acoustic score, and zero cyberpunk hallucinations
+iram video "The James Webb Space Telescope and Cosmic Dawn" --real
+
+# Dual-language Tamil & English documentary with acoustic score
+iram video "The History of Chola Maritime Power" --real --lang ta
+
+# Mood-led cinema trailer with dramatic tension curve
+iram video "The Silicon Sovereigns" --cinema --tension
+
+# High-velocity vertical video for YouTube Shorts & Reels
+iram video "Three Rules of Senior Software Architecture" --shorts</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 4B: OPENMONTAGE 12-PIPELINE HUB    -->
+      <!-- ========================================== -->
+      <section id="sec-montage" class="doc-section">
+        <span class="section-eyebrow">Agentic Film Direction</span>
+        <h1>OpenMontage 12-Pipeline Hub</h1>
+        <p>Integrated directly into <code>iram video</code>, OpenMontage provides 12 specialized agentic production pipelines capable of autonomous idea synthesis, scene planning, archive asset retrieval, and composition:</p>
+
+        <div class="pipeline-filter-strip">
+          <button class="filter-btn active" data-filter="all">All (12)</button>
+          <button class="filter-btn" data-filter="documentary">Documentary</button>
+          <button class="filter-btn" data-filter="animation">Animation</button>
+          <button class="filter-btn" data-filter="speech">Speech / Avatar</button>
+          <button class="filter-btn" data-filter="social">Social & Clips</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="pipelineTable">
+            <tr><th>Pipeline ID</th><th>Category</th><th>Description</th><th>Command Snippet</th></tr>
+            <tr data-cat="documentary"><td><code>documentary-montage</code></td><td>documentary</td><td>Retrieval-first thematic montage from NASA, Archive.org, Pexels</td><td><code>iram video montage "Prompt" --pipeline documentary-montage</code></td></tr>
+            <tr data-cat="animation"><td><code>animated-explainer</code></td><td>generated</td><td>Remotion React motion graphics explainer with KPIs and cards</td><td><code>iram video montage "Prompt" --pipeline animated-explainer</code></td></tr>
+            <tr data-cat="animation"><td><code>character-animation</code></td><td>animation</td><td>Character animation pipeline for local SVG/diffusers assets</td><td><code>iram video montage "Prompt" --pipeline character-animation</code></td></tr>
+            <tr data-cat="animation"><td><code>cinematic</code></td><td>cinematic</td><td>Mood-led trailer with dramatic tension curve & score</td><td><code>iram video montage "Prompt" --pipeline cinematic</code></td></tr>
+            <tr data-cat="speech"><td><code>talking-head</code></td><td>talking_head</td><td>Presenter-led talking-head video pipeline</td><td><code>iram video montage "Prompt" --pipeline talking-head</code></td></tr>
+            <tr data-cat="speech"><td><code>avatar-spokesperson</code></td><td>custom</td><td>Digital twin avatar spokesperson with audio sync</td><td><code>iram video montage "Prompt" --pipeline avatar-spokesperson</code></td></tr>
+            <tr data-cat="speech"><td><code>localization-dub</code></td><td>custom</td><td>Transcript-first multi-language dubbing and subtitle sync</td><td><code>iram video montage "Prompt" --pipeline localization-dub</code></td></tr>
+            <tr data-cat="social"><td><code>clip-factory</code></td><td>custom</td><td>Multi-clip vertical extraction for Shorts, Reels, and TikTok</td><td><code>iram video montage "Prompt" --pipeline clip-factory</code></td></tr>
+            <tr data-cat="social"><td><code>podcast-repurpose</code></td><td>custom</td><td>Long-form audio to highlight video with dynamic waveforms</td><td><code>iram video montage "Prompt" --pipeline podcast-repurpose</code></td></tr>
+            <tr data-cat="social"><td><code>screen-demo</code></td><td>screen_rec</td><td>Developer screen recording pipeline with kinetic callouts</td><td><code>iram video montage "Prompt" --pipeline screen-demo</code></td></tr>
+            <tr data-cat="animation"><td><code>hybrid</code></td><td>hybrid</td><td>Combined AI video + real B-roll + Remotion graphics</td><td><code>iram video montage "Prompt" --pipeline hybrid</code></td></tr>
+            <tr data-cat="animation"><td><code>framework-smoke</code></td><td>custom</td><td>Minimal pipeline verification and smoke-test harness</td><td><code>iram video montage "Smoke" --pipeline framework-smoke</code></td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 4C: REMOTION & BACKLOT HUD         -->
+      <!-- ========================================== -->
+      <section id="sec-remotion" class="doc-section">
+        <span class="section-eyebrow">React Compositions & Storyboard</span>
+        <h1>Remotion Motion Graphics & Backlot HUD</h1>
+        <p>Render production-ready React compositions headlessly using the integrated Remotion Chrome Headless Shell and monitor productions via the Backlot living storyboard HUD:</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Remotion Direct Rendering & Backlot</span>
+          </div>
+          <pre><code># List available zero-key Remotion React templates
+iram video demo list
+
+# Render the Developer Workflow Explainer to 1080p MP4
+iram video demo code-to-screen
+
+# Launch Backlot living storyboard visual inspector
+iram video backlot   # Opens at http://localhost:8080
+
+# Run multi-point automated QC audit on any MP4 video
+iram video --montage-audit out/video.mp4</code></pre>
+        </div>
+
+        <h2>Automated Multi-Point QC Media Audit</h2>
+        <p>Verify stream integrity, duration consistency, loudness, and codecs across renders:</p>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">JSON</span>
+            <span>Example Audit Report (`iram video --montage-audit`)</span>
+          </div>
+          <pre><code>{
+  "status": "ok",
+  "media": {
+    "file": "out/code-to-screen.mp4",
+    "duration_seconds": 25.045,
+    "format_name": "mov,mp4,m4a",
+    "size_bytes": 3726241,
+    "bit_rate": 1190238,
+    "stream_count": 2,
+    "audio": {
+      "codec": "aac",
+      "sample_rate": 48000,
+      "channels": 2,
+      "bit_rate": 317374
+    }
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 5: ALPORA THEMES & TIMELINE        -->
+      <!-- ========================================== -->
+      <section id="sec-themes" class="doc-section">
+        <span class="section-eyebrow">Visual Architecture</span>
+        <h1>ALPORA Dynamic Theming & Circadian Timeline</h1>
+        <p>IRAM OS features the <b>ALPORA Theme Engine</b>, providing 49 curated color palettes that switch sub-100ms across GTK3/4, Qt5/6, Hyprland borders, Waybar, Mako notifications, terminal emulators, and browsers without restarting running processes.</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>ALPORA Theme Commands</span>
+          </div>
+          <pre><code># List all 49 curated desktop palettes
+iram theme list
+
+# Switch to a specific theme instantly
+iram theme set tokyo-storm
+iram theme set alpora-alpine
+iram theme set rose-pine
+
+# Start the 24-hour Circadian Sun/Sky timeline engine
+iram theme timeline
+
+# Render the faceted polygon mountain system card
+iram fetch alpora</code></pre>
+        </div>
+
+        <h2>24-Hour Circadian Timeline Cycle</h2>
+        <div class="table-wrapper">
+          <table>
+            <tr><th>Time Window</th><th>Palette Phase</th><th>Lighting Dynamics</th><th>Waybar Gradient</th></tr>
+            <tr><td><b>06:00 – 09:00</b></td><td>Alpora Dawn</td><td>Soft cool amber tint with rising daylight saturation</td><td>Deep blue to morning gold</td></tr>
+            <tr><td><b>09:00 – 16:00</b></td><td>Alpora Alpine</td><td>High contrast crisp cobalt and ice-blue for maximum focus</td><td>Vibrant azure to cyan</td></tr>
+            <tr><td><b>16:00 – 19:00</b></td><td>Rose Sunset</td><td>Warm magenta and twilight rose to reduce blue light</td><td>Rose gold to dusk indigo</td></tr>
+            <tr><td><b>19:00 – 00:00</b></td><td>Tokyo Storm / Moon Lake</td><td>Deep OLED midnight blue with neon cyan accents</td><td>Dark violet to midnight</td></tr>
+            <tr><td><b>00:00 – 06:00</b></td><td>Gruvbox Warm Desert</td><td>Ultra low-emission amber monochrome to prevent eye fatigue</td><td>Warm charcoal to umber</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 6: VOICESTUDIO & VOXTYPE           -->
+      <!-- ========================================== -->
+      <section id="sec-voice" class="doc-section">
+        <span class="section-eyebrow">Studio Audio & Neural Speech</span>
+        <h1>VoiceStudio & System-Wide Voxtype</h1>
+        <p>IRAM OS provides sovereign on-device neural voice cloning, design, and speech recognition integrated directly with the PipeWire low-latency audio server.</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>VoiceStudio Operations</span>
+          </div>
+          <pre><code># Voice clone from a reference audio file
+iram voice clone --reference samples/director.wav --name "Director"
+
+# Neural speech synthesis directly to PipeWire studio monitors
+iram voice speak "All autonomous systems are operational on IRAM OS."
+
+# System-wide whisper dictation (Hold shortcut to dictate anywhere)
+voxtype   # Shortcut: Super + Ctrl + V or dedicated microphone key
+
+# Calibrate PipeWire DSP hardware tuning
+iram audio tuning --latency 64</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 7: AI AGENT SWARM & SIDECAR        -->
+      <!-- ========================================== -->
+      <section id="sec-agent" class="doc-section">
+        <span class="section-eyebrow">Autonomous Intelligence</span>
+        <h1>AI Sidecar & Agent Swarm Factory</h1>
+        <p>IRAM OS includes a native WebKitGTK floating Wayland AI Sidecar window and multi-agent topology execution runners.</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Agent Operations</span>
+          </div>
+          <pre><code># Toggle the native floating Wayland AI Sidecar window
+iram sidecar   # Shortcut: Super + Ctrl + Alt + S
+
+# Launch multi-account token failover daemon
+iram agent daemon --rotate-tokens
+
+# Dispatch autonomous multi-agent swarm team
+iram openrig team --manifest factory.yaml</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 8: HYPRLAND 0.56 & KEYBINDINGS     -->
+      <!-- ========================================== -->
       <section id="sec-hyprland" class="doc-section">
+        <span class="section-eyebrow">Window Management</span>
         <h1>Hyprland 0.56 & hypr-doctor Linter</h1>
         <p><code>hypr-doctor</code> is a zero-dependency static analysis linter and duplicate keybinding detector that guarantees clean, error-free Hyprland configurations.</p>
         
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Hypr Doctor</span>
+          </div>
           <pre><code>pip install hypr-doctor
 hypr-doctor check ~/.config/hypr/hyprland.conf
 hypr-doctor reload</code></pre>
@@ -514,78 +1548,168 @@ hypr-doctor reload</code></pre>
 
         <h2>Conflict-Free Dedicated AI Shortcut Layer</h2>
         <p>All autonomous ecosystem tools operate under the dedicated <code>$mainMod CTRL ALT</code> modifier namespace to eliminate window management collisions:</p>
-        <table>
-          <tr><th>Key Shortcut</th><th>Target Subsystem</th><th>Execution Command</th></tr>
-          <tr><td><code>Super + Ctrl + Alt + O</code></td><td>OpenRig Swarm Team</td><td><code>iram-openrig team</code></td></tr>
-          <tr><td><code>Super + Ctrl + Alt + P</code></td><td>Paperclip Company Board</td><td><code>iram-team board</code> (:3100)</td></tr>
-          <tr><td><code>Super + Ctrl + Alt + I</code></td><td>WorldMonitor Global Radar</td><td><code>iram-worldmonitor</code></td></tr>
-          <tr><td><code>Super + Ctrl + Alt + F</code></td><td>Financial Valuation (DCF)</td><td><code>iram-finance dcf NVDA</code></td></tr>
-          <tr><td><code>Super + Ctrl + Alt + S</code></td><td>Adversarial Security Audit</td><td><code>iram-audit</code></td></tr>
-          <tr><td><code>Super + Ctrl + Alt + A</code></td><td>Architecture Map (Archify)</td><td><code>iram-arch --open</code></td></tr>
-          <tr><td><code>Super + Ctrl + Alt + G</code></td><td>Generative AI Studio</td><td><code>iram-genai</code></td></tr>
-          <tr><td><code>Super + Ctrl + Alt + C</code></td><td>ComfyUI Diffusion Canvas</td><td><code>iram-comfyui</code> (:8188)</td></tr>
-          <tr><td><code>Super + Ctrl + Alt + M</code></td><td>Music & Score Studio</td><td><code>iram-music studio</code></td></tr>
-        </table>
+        <div class="table-wrapper">
+          <table>
+            <tr><th>Key Shortcut</th><th>Target Subsystem</th><th>Execution Command</th></tr>
+            <tr><td><code>Super + Space</code></td><td>App Launcher</td><td><code>wofi --show drun</code></td></tr>
+            <tr><td><code>Super + Return</code></td><td>Terminal</td><td><code>foot</code> / <code>alacritty</code></td></tr>
+            <tr><td><code>Super + Q</code></td><td>Close Window</td><td><code>hyprctl dispatch killactive</code></td></tr>
+            <tr><td><code>Super + Ctrl + Print</code></td><td>Instant Screen OCR</td><td><code>iram-ocr</code></td></tr>
+            <tr><td><code>Super + Ctrl + Alt + S</code></td><td>AI Sidecar HUD</td><td><code>iram-sidecar</code></td></tr>
+            <tr><td><code>Super + Ctrl + Alt + O</code></td><td>OpenRig Swarm Team</td><td><code>iram-openrig team</code></td></tr>
+            <tr><td><code>Super + Ctrl + Alt + V</code></td><td>Video Studio</td><td><code>iram video</code></td></tr>
+            <tr><td><code>Super + Ctrl + Alt + C</code></td><td>ComfyUI Diffusion Canvas</td><td><code>iram-comfyui</code> (:8188)</td></tr>
+            <tr><td><code>Super + Ctrl + Alt + F</code></td><td>Financial Valuation (DCF)</td><td><code>iram-finance dcf NVDA</code></td></tr>
+          </table>
+        </div>
       </section>
 
-      <!-- SECTION: CONTEXT CONDENSER -->
+      <!-- ========================================== -->
+      <!-- SECTION 9: CONTEXT CONDENSER               -->
+      <!-- ========================================== -->
       <section id="sec-context" class="doc-section">
+        <span class="section-eyebrow">Token Economy</span>
         <h1>context-condenser (98% BM25 Engine)</h1>
         <p>Eliminate LLM context exhaustion. <code>context-condenser</code> uses local SQLite FTS5 BM25 token frequency ranking to shrink logs, git diffs, and tool outputs prior to prompting.</p>
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>BM25 Context Compression</span>
+          </div>
           <pre><code>pip install context-condenser
 cat debug.log | context-condenser -q "ConnectionResetError" --ratio 0.05</code></pre>
         </div>
       </section>
 
-      <!-- SECTION: HINDSIGHT MEMORY -->
+      <!-- ========================================== -->
+      <!-- SECTION 10: MEMORY (HINDSIGHT)             -->
+      <!-- ========================================== -->
       <section id="sec-memory" class="doc-section">
+        <span class="section-eyebrow">Episodic Intelligence</span>
         <h1>agent-hindsight (Temporal Memory)</h1>
         <p>Persistent long-term memory engine for AI coding agents with half-life recency decay and semantic reflection.</p>
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Memory Retention & Recall</span>
+          </div>
           <pre><code>pip install agent-hindsight
 agent-hindsight retain "Default sink is combined_displays at metric 100" -c audio -i 5
 agent-hindsight recall "audio sink"</code></pre>
         </div>
       </section>
 
-      <!-- SECTION: SECURITY AUDIT -->
+      <!-- ========================================== -->
+      <!-- SECTION 11: SECURITY (PRE-PUSH)            -->
+      <!-- ========================================== -->
       <section id="sec-security" class="doc-section">
+        <span class="section-eyebrow">Supply Chain Defense</span>
         <h1>adversarial-pre-push Gate</h1>
         <p>6-phase security auditing git pre-push gate with separated Hunter and Verifier stages to catch secrets, eval leaks, and shell injection seams.</p>
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Security Hook Installation</span>
+          </div>
           <pre><code>pip install adversarial-pre-push
 adversarial-pre-push install-hook /path/to/repo
 adversarial-pre-push audit .</code></pre>
         </div>
       </section>
 
-      <!-- SECTION: DUAL WIFI -->
+      <!-- ========================================== -->
+      <!-- SECTION 12: DUAL WIFI MULTI-WAN            -->
+      <!-- ========================================== -->
       <section id="sec-wifi" class="doc-section">
+        <span class="section-eyebrow">Kernel Networking</span>
         <h1>linux-dual-wifi (ECMP Multi-WAN)</h1>
         <p>Aggregates concurrent internal PCIe and external USB Wi-Fi adapters using Linux kernel Equal-Cost Multi-Path policy routing tables and layer 4 flow hashing.</p>
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Multi-WAN Balance</span>
+          </div>
           <pre><code>git clone https://github.com/apravint/linux-dual-wifi.git
 cd linux-dual-wifi && ./install.sh
 dual-wifi balance</code></pre>
         </div>
       </section>
 
-      <!-- SECTION: ARCHIFY -->
+      <!-- ========================================== -->
+      <!-- SECTION 13: SPATIAL 3D COMPUTING           -->
+      <!-- ========================================== -->
+      <section id="sec-spatial" class="doc-section">
+        <span class="section-eyebrow">WebGL Visual Computing</span>
+        <h1>Three.js 3D Desktop Universe & WebGL Studio</h1>
+        <p>IRAM OS provides spatial 3D WebGL desktop command hubs, kinetic title studios, and interactive particle simulators:</p>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>3D Studio Commands</span>
+          </div>
+          <pre><code># Launch 3D Desktop Command Universe
+iram-3d
+
+# Launch 3D kinetic typography studio
+iram video --threejs
+
+# Export standalone 3D motion scene to HTML
+iram video --export-3d titles.html</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 13B: ARCHIFY ARCHITECTURE MAP      -->
+      <!-- ========================================== -->
       <section id="sec-archify" class="doc-section">
-        <h1>archify-py (Visualizer)</h1>
+        <span class="section-eyebrow">Codebase Cartography</span>
+        <h1>archify-py (Architecture Visualizer)</h1>
         <p>Zero-dependency architecture mapper that scans repositories and generates interactive glassmorphic HTML dashboards or embeddable SVG diagrams.</p>
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Archify Execution</span>
+          </div>
           <pre><code>pip install archify-py
 archify . --svg architecture.svg --open</code></pre>
         </div>
       </section>
 
-      <!-- SECTION: LIVE ISO -->
-      <section id="sec-iso" class="doc-section">
-        <h1>Ubuntu 26.10 Live ISO Toolchain</h1>
-        <p>Automated toolchain with automated headless QEMU boot verification to compile bootable hybrid Live ISOs.</p>
+      <!-- ========================================== -->
+      <!-- SECTION 14: QUANT TRADING ENGINE           -->
+      <!-- ========================================== -->
+      <section id="sec-quant" class="doc-section">
+        <span class="section-eyebrow">Quantitative Analytics</span>
+        <h1>IRAM Quant Cross-Market Trading System</h1>
+        <p>Cross-market algorithmic stock leader scanner covering US (NYSE/NASDAQ) and Indian (NSE) equities simultaneously with automated morning briefings and DCF valuation.</p>
         <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>Quant Market Screening</span>
+          </div>
+          <pre><code># Algorithmic screening across US market leaders
+iram quant us
+
+# Algorithmic screening across NSE India market leaders
+iram quant in
+
+# Calculate DCF intrinsic value
+iram-finance dcf NVDA</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 15: LIVE ISO TOOLCHAIN             -->
+      <!-- ========================================== -->
+      <section id="sec-iso" class="doc-section">
+        <span class="section-eyebrow">Distribution Mastering</span>
+        <h1>Ubuntu 26.10 Live ISO Toolchain</h1>
+        <p>Automated toolchain with headless QEMU boot verification to compile bootable hybrid Live ISOs.</p>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>ISO Compilation</span>
+          </div>
           <pre><code>git clone https://github.com/apravint/ubuntu-hyprland-iso-builder.git
 cd ubuntu-hyprland-iso-builder
 sudo bash build/build-iso.sh</code></pre>
@@ -596,25 +1720,39 @@ sudo bash build/build-iso.sh</code></pre>
   </div>
 
   <script>
-    // Live Sidebar Tab Switching
+    // Live Sidebar Navigation Tab Switching
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('.doc-section');
     const sidebar = document.getElementById('sidebar');
     const menuBtn = document.getElementById('menuBtn');
 
+    function switchSection(targetId) {
+      navItems.forEach(n => {
+        n.classList.toggle('active', n.getAttribute('data-target') === targetId);
+      });
+      sections.forEach(s => {
+        s.classList.toggle('active', s.id === targetId);
+      });
+      window.location.hash = targetId;
+      if (window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+      }
+    }
+
     navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        navItems.forEach(n => n.classList.remove('active'));
-        sections.forEach(s => s.classList.remove('active'));
-        item.classList.add('active');
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
         const targetId = item.getAttribute('data-target');
-        const targetSec = document.getElementById(targetId);
-        if (targetSec) targetSec.classList.add('active');
-        if (window.innerWidth <= 768) {
-          sidebar.classList.remove('open');
-        }
+        switchSection(targetId);
       });
     });
+
+    if (window.location.hash) {
+      const hashId = window.location.hash.substring(1);
+      if (document.getElementById(hashId)) {
+        switchSection(hashId);
+      }
+    }
 
     if (menuBtn) {
       menuBtn.addEventListener('click', () => {
@@ -632,22 +1770,258 @@ sudo bash build/build-iso.sh</code></pre>
       });
     });
 
+    // Global Command+K / Ctrl+K listener
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+      }
+    });
+
     // 1-Click Code Block Copy Buttons
     document.querySelectorAll('.code-container').forEach(container => {
+      const pre = container.querySelector('pre');
+      if (!pre) return;
       const btn = document.createElement('button');
       btn.className = 'copy-btn';
       btn.innerText = 'Copy';
       btn.addEventListener('click', () => {
-        const code = container.querySelector('code').innerText;
+        const code = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
         navigator.clipboard.writeText(code).then(() => {
           btn.innerText = 'Copied!';
-          setTimeout(() => btn.innerText = 'Copy', 2000);
+          btn.style.background = 'var(--accent)';
+          btn.style.color = '#fff';
+          setTimeout(() => {
+            btn.innerText = 'Copy';
+            btn.style.background = '';
+            btn.style.color = '';
+          }, 2000);
         });
       });
-      container.appendChild(btn);
+      const header = container.querySelector('.code-header');
+      if (header) {
+        header.appendChild(btn);
+      } else {
+        container.appendChild(btn);
+      }
     });
 
-    // FastMCP Playground Simulator
+    // Theme Switcher Logic
+    const themeSelector = document.getElementById('themeSelector');
+    const savedTheme = localStorage.getItem('iram-docs-theme') || 'theme-tokyo-storm';
+    document.body.className = savedTheme;
+    if (themeSelector) {
+      themeSelector.value = savedTheme;
+      themeSelector.addEventListener('change', (e) => {
+        const selected = e.target.value;
+        document.body.className = selected;
+        localStorage.setItem('iram-docs-theme', selected);
+      });
+    }
+
+    // Storytold Craft Suite Tab Switcher
+    const CRAFT_APPS = {
+      photo: {
+        name: "PhotoCraft",
+        role: "Photoshop Alternative (Raster Image Editor)",
+        badge: "craft-photocraft",
+        desc: "High-speed raster graphics editor supporting PSD import, multi-layer compositing, non-destructive adjustment layers, neural inpainting, and GPU-accelerated brush engines.",
+        formats: "PSD, PSB, TIFF, PNG, EXR, WebP, JPEG-XL",
+        cmd: "iram craft photo · Super + Ctrl + Alt + C"
+      },
+      vector: {
+        name: "VectorCraft",
+        role: "Illustrator Alternative (Vector Graphics & Typography)",
+        badge: "craft-vectorcraft",
+        desc: "Precision vector design studio with infinite canvas, non-destructive boolean geometry, font glyph editing, SVG export, and AI vector tracing.",
+        formats: "SVG, AI, EPS, PDF, DXF, GeoJSON",
+        cmd: "iram craft vector · Super + Ctrl + Alt + V"
+      },
+      film: {
+        name: "FilmCraft",
+        role: "Premiere Pro Alternative (Non-Linear Video Editor)",
+        badge: "craft-filmcraft",
+        desc: "High-throughput magnetic timeline editor supporting 4K/8K footage, hardware NVENC/VA-API rendering, 3D LUT color grading, and optical flow transitions.",
+        formats: "MP4, MOV, ProRes, MKV, WebM, XML, EDL",
+        cmd: "iram craft film · Super + Ctrl + Alt + F"
+      },
+      sound: {
+        name: "SoundCraft",
+        role: "Pro Tools Alternative (Digital Audio Workstation)",
+        badge: "craft-soundcraft",
+        desc: "PipeWire low-latency multi-track audio workstation with VST3/LV2 plugin hosts, spectral audio repair, MIDI sequencing, and hardware DSP calibration.",
+        formats: "WAV, FLAC, AIFF, OGG, MIDI, PipeWire Raw",
+        cmd: "iram craft sound · Super + Ctrl + Alt + S"
+      },
+      cad: {
+        name: "CADCraft",
+        role: "AutoCAD / Fusion 360 Alternative (Parametric 2D/3D)",
+        badge: "craft-cadcraft",
+        desc: "Parametric CAD modeling and 2D architectural drafting with geometric constraint solvers, STEP/IGES import, and direct 3D-printing slicer export.",
+        formats: "STEP, IGES, STL, OBJ, DXF, DWG",
+        cmd: "iram craft cad · Super + Ctrl + Alt + D"
+      },
+      fig: {
+        name: "FigCraft",
+        role: "Figma Alternative (UI/UX Design & Prototyping)",
+        badge: "craft-figcraft",
+        desc: "Collaborative design workspace with design token variables, flex auto-layout, interactive state machines, and direct CSS/Tailwind export.",
+        formats: "FIG, JSON Tokens, HTML/CSS, React TSX",
+        cmd: "iram craft fig · Super + Ctrl + Alt + G"
+      },
+      light: {
+        name: "LightCraft",
+        role: "Lightroom Alternative (RAW Photo Development)",
+        badge: "craft-lightcraft",
+        desc: "Non-destructive RAW photo development with lens calibration, chromatic aberration correction, tone curve split-toning, and batch export.",
+        formats: "DNG, CR3, NEF, ARW, RAF, TIFF",
+        cmd: "iram craft light"
+      },
+      word: {
+        name: "WordCraft",
+        role: "Microsoft Word Alternative (Typographic Processor)",
+        badge: "craft-wordcraft",
+        desc: "Distraction-free typographic word processor with real-time markdown split view, citation management, and exact DOCX/PDF export.",
+        formats: "DOCX, ODT, Markdown, PDF, LaTeX",
+        cmd: "iram craft word"
+      },
+      grid: {
+        name: "GridCraft",
+        role: "Microsoft Excel Alternative (High-Speed Spreadsheet)",
+        badge: "craft-gridcraft",
+        desc: "High-throughput spreadsheet engine capable of rendering 1,000,000 rows at 60 FPS, multi-dimensional pivot tables, and formula solvers.",
+        formats: "XLSX, CSV, TSV, Parquet, Arrow",
+        cmd: "iram craft grid"
+      },
+      deck: {
+        name: "DeckCraft",
+        role: "PowerPoint Alternative (Presentation Slides)",
+        badge: "craft-deckcraft",
+        desc: "Modern presentation designer with WebGL 3D transitions, animated Chart.js data visuals, code syntax blocks, and export to PDF/HTML5.",
+        formats: "PPTX, HTML Slides, PDF, Video MP4",
+        cmd: "iram craft deck"
+      },
+      pdf: {
+        name: "PdfCraft",
+        role: "Adobe Acrobat Alternative (PDF Editor & Signer)",
+        badge: "craft-pdfcraft",
+        desc: "Fast vector PDF editor for text editing, form completion, cryptographic certificate signing, redaction, and multi-document page merging.",
+        formats: "PDF, PDF/A, FDF, XFDF",
+        cmd: "iram craft pdf"
+      }
+    };
+
+    const craftTabStrip = document.getElementById('craftTabStrip');
+    if (craftTabStrip) {
+      craftTabStrip.querySelectorAll('.app-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          craftTabStrip.querySelectorAll('.app-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const appKey = btn.getAttribute('data-app');
+          const data = CRAFT_APPS[appKey];
+          if (data) {
+            document.getElementById('craftAppName').innerText = data.name;
+            document.getElementById('craftAppRole').innerText = data.role;
+            document.getElementById('craftAppBadge').innerText = data.badge;
+            document.getElementById('craftAppDesc').innerText = data.desc;
+            document.getElementById('craftAppFormats').innerText = data.formats;
+            document.getElementById('craftAppCmd').innerText = data.cmd;
+          }
+        });
+      });
+    }
+
+    // OpenMontage Pipeline Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const pipelineRows = document.querySelectorAll('#pipelineTable tr[data-cat]');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        pipelineRows.forEach(row => {
+          const cat = row.getAttribute('data-cat');
+          row.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
+        });
+      });
+    });
+
+    // Terminal Simulator
+    const terminalBody = document.getElementById('terminalBody');
+    const termChips = document.querySelectorAll('.term-chip');
+    const TERMINAL_OUTPUTS = {
+      info: `$ iram info
+  Operating System: IRAM OS (Ubuntu 26.10 Sovereign Edition)
+  Linux Kernel:     7.3.0-9-generic (x86_64)
+  Compositor:       Hyprland 0.56.2 (Wayland protocol)
+  Active Theme:     Tokyo Storm (Dynamic ALPORA Sub-100ms)
+  Creative Suite:   Storytold Craft Ready (11 Rust native apps)
+  Video Studio:     iram-video 1080p/4K Cinema & OpenMontage Ready
+  FastMCP Server:   Active on port :8991 (28 native tools)
+  Default Agent:    Google Antigravity CLI (agy) & OpenRig Swarm`,
+      pipelines: `$ iram video pipelines
+╭─────────────────────────────────────────────────────────────────────────────╮
+│              🎬 IRAM VIDEO · OPENMONTAGE PRODUCTION PIPELINES               │
+├──────────────────────┬─────────────┬────────────────────────────────────────┤
+│ PIPELINE             │ CATEGORY    │ DESCRIPTION                            │
+├──────────────────────┼─────────────┼────────────────────────────────────────┤
+│ documentary-montage  │ documentary │ Retrieval-first thematic montage pipe...│
+│ animated-explainer   │ generated   │ Generated explainer video from topic... │
+│ character-animation  │ animation   │ Character animation pipeline for loca...│
+│ cinematic            │ cinematic   │ Mood-led cinematic pipeline for trail...│
+│ clip-factory         │ custom      │ Multi-clip extraction pipeline         │
+│ talking-head         │ talking_hea │ End-to-end talking-head video pipeline │
+╰──────────────────────┴─────────────┴────────────────────────────────────────╯
+Run with: iram video montage "<prompt>" --pipeline <pipeline-id>`,
+      craft: `$ iram craft
+╭─────────────────────────────────────────────────────────────────────────────╮
+│                     🎨 STORYTOLD CRAFT SUITE LAUNCHER                       │
+├────────────────┬────────────────────┬───────────────────────────────────────┤
+│ APP            │ REPLACES           │ NATIVE BINARY                         │
+├────────────────┼────────────────────┼───────────────────────────────────────┤
+│ photocraft     │ Adobe Photoshop    │ /usr/local/bin/craft-photocraft       │
+│ vectorcraft    │ Adobe Illustrator  │ /usr/local/bin/craft-vectorcraft      │
+│ filmcraft      │ Adobe Premiere Pro │ /usr/local/bin/craft-filmcraft        │
+│ soundcraft     │ Avid Pro Tools     │ /usr/local/bin/craft-soundcraft       │
+│ figcraft       │ Figma UI Design    │ /usr/local/bin/craft-figcraft         │
+│ cadcraft       │ AutoCAD / Fusion   │ /usr/local/bin/craft-cadcraft         │
+╰────────────────┴────────────────────┴───────────────────────────────────────╯`,
+      theme: `$ iram theme timeline
+[ALPORA] 24-Hour Circadian Timeline Engine Activated
+Current Time: 12:10:00 IST (Daylight Apex)
+Palette:      Alpora Alpine (Cobalt / Ice Blue)
+Color Temp:   6500K (Max Visual Acuity)
+Waybar CSS:   Synchronized (/home/apravint/.config/waybar/style.css)
+Hyprland:     Borders set to rgba(38bdf8ee) rgba(0284c7ee) 45deg
+Next Shift:   16:00:00 (Transitioning to Rosé Sunset)`,
+      quant: `$ iram quant us
+[IRAM QUANT] Cross-Market Momentum Scanner (US NYSE/NASDAQ)
+  1. NVDA   | Score: 94.2 | RSI: 62.4 | DCF Margin: +18.5% | Bullish Continuation
+  2. MSFT   | Score: 91.0 | RSI: 58.1 | DCF Margin: +12.3% | Low Volatility Accum
+  3. PLTR   | Score: 89.4 | RSI: 68.7 | DCF Margin: +24.1% | High Momentum Breakout
+Scanned 420 equities in 0.42s · Live data via Sovereign Engine`,
+      audit: `$ iram-audit
+🛡️  Running IRAM OS Adversarial Pre-Push Audit...
+[Phase 1/6] Secret & Token Hunting: PASSED (0 leaks)
+[Phase 2/6] Eval Leaks & Shell Boundary: PASSED (0 injection seams)
+[Phase 3/6] Hyprland Config Syntax: PASSED (0 duplicate binds)
+[Phase 4/6] PipeWire Audio Recovery: PASSED (Stream healthy)
+[Phase 5/6] FastMCP Tool Schema Verification: PASSED (28 tools valid)
+[Phase 6/6] QEMU Headless Boot Verifier: PASSED
+✅ IRAM OS Pre-Push verification complete (0 critical/high findings).`
+    };
+
+    termChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const cmdKey = chip.getAttribute('data-cmd');
+        const text = TERMINAL_OUTPUTS[cmdKey];
+        if (text && terminalBody) {
+          terminalBody.innerText = text;
+        }
+      });
+    });
+
+    // FastMCP Simulator
     const toolSelect = document.getElementById('toolSelect');
     const runToolBtn = document.getElementById('runToolBtn');
     const toolOutput = document.getElementById('toolOutput');
@@ -658,42 +2032,58 @@ sudo bash build/build-iso.sh</code></pre>
         params: { name: "get_windows", arguments: {} },
         result: [
           { address: "0x59a3aa3dee90", title: "Paperclip Orchestrator", class: "Google-chrome", workspace: "1" },
-          { address: "0x59a3aa3d54d0", title: "IRAM Shell — Konsole", class: "org.kde.konsole", workspace: "1" }
+          { address: "0x59a3aa3d54d0", title: "IRAM Shell — foot", class: "foot", workspace: "1" },
+          { address: "0x59a3aa3e8910", title: "PhotoCraft v1.0", class: "craft-photocraft", workspace: "2" }
         ]
       },
       focus_window: {
         method: "tools/call",
-        params: { name: "focus_window", arguments: { target: "Google-chrome" } },
-        result: { status: "success", message: "Focused window: Google-chrome (0x59a3aa3dee90)" }
+        params: { name: "focus_window", arguments: { target: "craft-photocraft" } },
+        result: { status: "success", message: "Focused window: craft-photocraft (0x59a3aa3e8910)" }
       },
       get_audio_status: {
         method: "tools/call",
         params: { name: "get_audio_status", arguments: {} },
-        result: { default_sink: "combined_displays", volume: "100%", mute: false, driver: "PipeWire" }
+        result: { default_sink: "combined_displays", volume: "100%", mute: false, driver: "PipeWire", dsp_latency_ms: 2.4 }
       },
       toggle_audio_sink: {
         method: "tools/call",
         params: { name: "toggle_audio_sink", arguments: {} },
-        result: { action: "toggled", new_sink: "alsa_output.pci-0000_00_1b.0.analog-stereo" }
+        result: { action: "toggled", new_sink: "alsa_output.pci-0000_00_1b.0.analog-stereo", latency: "sub-10ms" }
+      },
+      audit_media: {
+        method: "tools/call",
+        params: { name: "audit_media", arguments: { file_path: "out/documentary.mp4" } },
+        result: { status: "ok", media: { duration_seconds: 25.04, format: "QuickTime/MOV", audio: { codec: "aac", rate: 48000, channels: 2 } } }
+      },
+      set_theme: {
+        method: "tools/call",
+        params: { name: "set_theme", arguments: { theme_name: "alpora-alpine" } },
+        result: { status: "success", palette: "alpora-alpine", switch_latency_ms: 42, processes_restarted: 0 }
+      },
+      launch_craft: {
+        method: "tools/call",
+        params: { name: "launch_craft", arguments: { app: "vector" } },
+        result: { status: "launched", binary: "/usr/local/bin/craft-vectorcraft", pid: 84920, workspace: 3 }
       },
       get_system_health: {
         method: "tools/call",
         params: { name: "get_system_health", arguments: {} },
-        result: { systemd_failed_units: 0, memory_available: "10Gi", swap_used: "2.9Mi", status: "HEALTHY" }
+        result: { systemd_failed_units: 0, memory_available: "10.4Gi", swap_used: "2.9Mi", status: "HEALTHY" }
       },
       condense_context: {
         method: "tools/call",
-        params: { name: "condense_context", arguments: { raw_text: "[5,000 lines of journalctl]", query: "error" } },
+        params: { name: "condense_context", arguments: { raw_text: "[5,000 lines of system logs]", query: "error" } },
         result: { original_tokens: 18450, condensed_tokens: 368, compression_ratio: "98.01%", status: "BM25 Ranked" }
       },
       memory_retain: {
         method: "tools/call",
         params: { name: "memory_retain", arguments: { fact: "Dual Wi-Fi uses table 200 via 192.168.29.1", category: "network" } },
-        result: { entry_id: 142, timestamp: "2026-10-21T10:20:00", status: "Retained with half-life decay" }
+        result: { entry_id: 142, timestamp: "2026-10-25T12:00:00", status: "Retained with half-life decay" }
       }
     };
 
-    if (runToolBtn) {
+    if (runToolBtn && toolSelect && toolOutput) {
       runToolBtn.addEventListener('click', () => {
         const tool = toolSelect.value;
         const mock = MOCK_DATA[tool] || { error: "Unknown tool" };
