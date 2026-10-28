@@ -971,11 +971,12 @@
 
       <li class="nav-category">
         <span>4. Universal Film Studio</span>
-        <span class="nav-category-badge">3</span>
+        <span class="nav-category-badge">4</span>
       </li>
       <li><a class="nav-item" data-target="sec-video">🎬 iram-video & YouTube Cinema</a></li>
       <li><a class="nav-item" data-target="sec-montage">🎞️ OpenMontage 12-Pipeline Hub</a></li>
       <li><a class="nav-item" data-target="sec-remotion">⚛️ Remotion & Backlot HUD</a></li>
+      <li><a class="nav-item" data-target="sec-personalive">🗣️ PersonaLive Streamable Avatar</a></li>
 
       <li class="nav-category">
         <span>5. Theming & Voice</span>
@@ -1081,6 +1082,7 @@
             <span class="terminal-chip-label">Try Commands:</span>
             <button class="term-chip" data-cmd="info">iram info</button>
             <button class="term-chip" data-cmd="pipelines">iram video pipelines</button>
+            <button class="term-chip" data-cmd="avatar">iram video avatar</button>
             <button class="term-chip" data-cmd="craft">iram craft</button>
             <button class="term-chip" data-cmd="theme">iram theme timeline</button>
             <button class="term-chip" data-cmd="quant">iram quant us</button>
@@ -1433,6 +1435,94 @@ iram video --montage-audit out/video.mp4</code></pre>
     }
   }
 }</code></pre>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- SECTION 4D: PERSONALIVE STREAMABLE AVATAR  -->
+      <!-- ========================================== -->
+      <section id="sec-personalive" class="doc-section">
+        <span class="section-eyebrow">Real-Time Digital Human</span>
+        <h1>PersonaLive Real-Time Streamable Portrait Diffusion</h1>
+        <p><b>PersonaLive</b> (CVPR 2026, developed by GVCLab) is IRAM OS's local, zero-cloud-cost portrait animation engine. It synthesizes expressive, infinite-length talking avatar animations from a single reference photo and driving video/audio stream with consumer-GPU memory constraints (~12GB VRAM).</p>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">⚡</span>
+              <span class="card-badge">Diffusion</span>
+            </div>
+            <div class="card-title">Streamable Diffusion Architecture</div>
+            <div class="card-desc">Decoupled Reference UNet + Denoising UNet with frame-by-frame temporal modules preventing context memory explosion.</div>
+            <div class="card-footer">Zero Memory Drift · Infinite Duration</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🎙️</span>
+              <span class="card-badge">Lip Sync</span>
+            </div>
+            <div class="card-title">Motion Extractor & Pose Guider</div>
+            <div class="card-desc">Tracks fine facial landmarks, micro-expressions, gaze alignment, and mouth cadence with zero robotic distortion.</div>
+            <div class="card-footer">Audio-Driven & Video-Driven</div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <span class="card-icon">🏎️</span>
+              <span class="card-badge">Acceleration</span>
+            </div>
+            <div class="card-title">TensorRT & ONNX Runtime</div>
+            <div class="card-desc">Pre-compiled FP16 ONNX and TensorRT graph optimizations enabling real-time 30fps webcam and live broadcast streaming.</div>
+            <div class="card-footer">Port :8080 · WebSocket / WebRTC</div>
+          </div>
+        </div>
+
+        <h2>CLI Commands & Usage</h2>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">BASH</span>
+            <span>IRAM Video PersonaLive Commands</span>
+          </div>
+          <pre><code># 1. Generate standalone avatar video using PersonaLive engine
+iram video --avatar auto -o avatar_presenter.mp4
+
+# 2. Animate a custom portrait with driving video motion
+iram video --avatar \
+  --face /path/to/character_portrait.png \
+  --drive /path/to/driving_motion.mp4 \
+  --avatar-engine personalive \
+  -o speech_avatar.mp4
+
+# 3. Composite talking presenter PiP directly onto a documentary master video
+iram video "Next-Generation Autonomous Linux Desktops" \
+  --real \
+  --avatar /path/to/avatar_face.png \
+  -o documentary_with_presenter.mp4
+
+# 4. Launch the real-time webcam streaming interface
+cd ~/PersonaLive/webcam && bash start.sh   # Live on http://localhost:8080</code></pre>
+        </div>
+
+        <h2>OpenMontage & Remotion Integration</h2>
+        <p>In OpenMontage, <code>personalive_avatar</code> is registered under <code>ToolRegistry</code> as a local <code>$0.00</code> provider. When paired with Remotion's <code>TalkingHead.tsx</code>, it produces fully broadcast-packaged videos with kinetic word subtitles and animated lower thirds:</p>
+
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-lang-tag">PYTHON</span>
+            <span>OpenMontage Agent Invocation (`tools.avatar.personalive_avatar`)</span>
+          </div>
+          <pre><code>from tools.avatar.personalive_avatar import PersonaLiveAvatar
+
+# Agent invokes PersonaLive tool with zero API costs
+tool = PersonaLiveAvatar()
+result = tool.execute({
+    "image_path": "assets/presenter.png",
+    "driving_video": "assets/driving_motion.mp4",
+    "output_path": "output/avatar.mp4",
+    "stream_gen": True
+})
+print("Video generated:", result.data["video_path"])</code></pre>
         </div>
       </section>
 
@@ -1973,6 +2063,14 @@ sudo bash build/build-iso.sh</code></pre>
 │ talking-head         │ talking_hea │ End-to-end talking-head video pipeline │
 ╰──────────────────────┴─────────────┴────────────────────────────────────────╯
 Run with: iram video montage "<prompt>" --pipeline <pipeline-id>`,
+      avatar: `$ iram video --avatar auto
+🎬 [PERSONALIVE] Generating real-time portrait animation for: ref_image.png...
+⚙️ Model:       GVCLab/PersonaLive (CVPR 2026 Streamable Diffusion)
+📦 Architecture: Reference UNet + Motion Extractor + Denoising UNet (FP16)
+⚡ Acceleration: TensorRT / ONNX Runtime (~12GB VRAM Profile)
+🔄 Sync:         Infinite-Length Frame-by-Frame Temporal Smoothing
+✅ Rendered:     saved_results/output_avatar.mp4 (512x512 30fps)
+✨ Cost:         $0.00 (100% Sovereign Local Inference)`,
       craft: `$ iram craft
 ╭─────────────────────────────────────────────────────────────────────────────╮
 │                     🎨 STORYTOLD CRAFT SUITE LAUNCHER                       │

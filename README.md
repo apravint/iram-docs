@@ -40,8 +40,9 @@ Explore the live documentation site:
      - **LightCraft**, **WordCraft**, **GridCraft**, **DeckCraft**, **PdfCraft**.
    - Interactive app comparison explorer with launch commands and native file formats.
 
-4. **Universal Film & Video Studio Engine (`iram-video` & OpenMontage):**
+4. **Universal Film & Video Studio Engine (`iram-video`, OpenMontage & PersonaLive):**
    - Real 1080p/4K YouTube Documentary generator (`iram video "<topic>" --real`).
+   - PersonaLive Real-Time Streamable Portrait Diffusion (CVPR 2026, 12GB VRAM infinite-length avatars).
    - OpenMontage 12-pipeline agentic directing matrix with category filtering.
    - Remotion React motion graphics headlessly rendered with Chrome Headless Shell.
    - Backlot living storyboard visual inspector (`http://localhost:8080`).
